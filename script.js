@@ -7,6 +7,7 @@
  */
 let startTime = null, previousEndTime = null;
 let currentWordIndex = 0;
+let pressCount = 0
 const wordsToType = [];
 
 const modeSelect = document.getElementById("mode");
@@ -33,6 +34,7 @@ const startTest = (wordCount = 50) => {
     currentWordIndex = 0;
     startTime = null;
     previousEndTime = null;
+    pressCount = 0;
 
     for (let i = 0; i < wordCount; i++) {
         wordsToType.push(getRandomWord(modeSelect.value));
@@ -58,10 +60,15 @@ const startTimer = () => {
 const getCurrentStats = () => {
     const elapsedTime = (Date.now() - previousEndTime) / 1000; // Seconds
     const wpm = (wordsToType[currentWordIndex].length / 5) / (elapsedTime / 60); // 5 chars = 1 word
-    const accuracy = (wordsToType[currentWordIndex].length / inputField.value.length) * 100;
+    const accuracy = (wordsToType.slice(0, currentWordIndex + 1).join("").length / pressCount) * 100;
 
     return { wpm: wpm.toFixed(2), accuracy: accuracy.toFixed(2) };
 };
+
+// Count user key presses
+const getPressCount = (event) => {
+    if (String(event.key).match(/^\S$/)) { pressCount++ }
+}
 
 // Move to the next word and update stats only on spacebar press
 const updateWord = (event) => {
@@ -98,6 +105,7 @@ const highlightNextWord = () => {
 // Attach `updateWord` to `keydown` instead of `input`
 inputField.addEventListener("keydown", (event) => {
     startTimer();
+    getPressCount(event)
     updateWord(event);
 });
 modeSelect.addEventListener("change", () => startTest());
