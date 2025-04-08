@@ -77,7 +77,7 @@ const updateWord = (event) => {
             if (!previousEndTime) previousEndTime = startTime;
 
             const { wpm, accuracy } = getCurrentStats();
-            results.textContent = `WPM: ${wpm}, Accuracy: ${accuracy}%`;
+            statsEvolution(wpm, accuracy)
 
             currentWordIndex++;
             previousEndTime = Date.now();
@@ -88,6 +88,29 @@ const updateWord = (event) => {
         }
     }
 };
+
+// Display results with color when changing
+const statsEvolution = (wpm, accuracy) => {
+    if (!results.textContent) {
+        results.textContent = `WPM: ${wpm}, Accuracy: ${accuracy}%`;
+    } else {
+        let resultsCopy = results.textContent
+
+        const wpmPattern = (Number(resultsCopy.match(/[0-9]*\.?[0-9]*(?=,)/))) // Regexp for finding WPM old value
+        if (wpmPattern > wpm) {
+            results.innerHTML = `WPM: <span style='color: red'>${wpm}</span>`
+        } else {
+            results.innerHTML = `WPM: <span style='color: green'>${wpm}</span>`
+        }
+
+        const accuracyPattern = (Number(resultsCopy.match(/[0-9]*\.?[0-9]*(?=%)/)))
+        if (accuracyPattern > accuracy) {
+            results.innerHTML += `, Accuracy: <span style='color: red'>${accuracy}%</span>`
+        } else {
+            results.innerHTML += `, Accuracy: <span style='color: green'>${accuracy}%</span>`
+        }
+    }
+}
 
 // Highlight the current word in red
 const highlightNextWord = () => {
