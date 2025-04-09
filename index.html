@@ -4,27 +4,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Typing Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <title>ChocoType</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="js/script.js" defer></script>
 </head>
 
 <body>
     <header>
-        <h1>Typing Test</h1>
-        <label for="mode">Select Mode:</label>
-        <select id="mode">
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
-        </select>
+        <div class="choco--navbar">
+            <div class="choco--logo-part">
+                <img src="assets/img/logo.jpeg" class="choco--logo"alt="logo">
+                <h1 class="choco--wsname">ChocoType</h1>
+            </div>
+            <div class="choco--navbar--icon">
+                <img class="choco--icon--user " src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAfdJREFUSEu11UuoSFEUBuDvkphgIKG8ihCFgVAyQiEjjzEppZCipDBBjL1CKY+ZIlEiSYkMiJIByiMGSJJMGHidpXNq2519T13dPdtn/Xv9a+317//06OfV08/5dREMwkosw2xMrAt6jUe4jkv4USq0N4LFOIFJHV0+w0bcbsOVCHZhH50dNjl/YjsO5SRtBHuwt4+z2YKj6dmcYAlu9DF5HPtVzWU+HjQ5UoIBeILpLQRfsBOX69hqHMDQFuxdLGwjCLVcLFS/Dmez2Kb8OpL4AtyLfdrBhaqDVQWCkfiUxcbgXQF/GFtzgrcYVzgwCh+z2Gi8L+AfYk5O8A1DCgfW43QWC+0fL+A/Y0RO8LUwtMDFkHfUQw4xxLwOYliBIHINzwmeY8p/SDQ9+rRRYzrkM1jbQhDafoz7lSV8qONx/3MrH5pVPcroKF+nsCHvYDmuZsjoagVeFDqbhmuJCTawRbiVE8Q+Kp1Zo35jMl51XNtUhOE1Kzqd12xyqwjmmwn4POKRfS+QhOrOYU0dj+uMV/z3kbV1EN/CSfcnCd9UkjtS+39YyUDMqHUe5jY2wW7GsbSYkl3vrh2164fU5Aq73oZ4wf+s3hIsxUmM75hBCCEUc6cN11Xh4NqfQmEx/AmI4b9E2EEo6Aqig9bVRdBRfHe43wn+AAntVBlfO442AAAAAElFTkSuQmCC"/>
+                <img class="choco--icon--setting" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAActJREFUSEu11curjlEUBvDfEREGCsllwEAxkpFyN/AnMECUci0jZSaXqTIgiTJAiL9BuWSAkVJKEiUSI+USBrxL71f77PY++yvn25O33rXW86z1rLX2HjPiMzZifMMSPMDGLJn72NJKcFiCPxWgZnzJYTrm4X0Puhn3KgSb8LC3LcJn/E59SwSPsAYXMRWHGjKc55/UB/EYGyYi2I2rLV0b9sC4PvBJK5iJV4hS/+d8wHJ8D5CU4ET342QFOYIO9BKEy9oukcudjAsq/oF1Oie4je2FgI9Y3Wkc3/QswXPMKcTcwK6cIKbnDI5kATtxs5Lpvr6S1Hyuk+cYfuYEA6cfmJFELCxkPzBHFe8S32+Y3RrTX5iWOC1G9KB0coJo7KwaQUh0FoczpHFjl9n24kr27wKOliS6g22VJq/qiD8VmvwMcwsxt7Aj70GM1fGKFCFRNDQ2dQrW4dIEYxrjfioniEV7i/kVkmF/x320tLRoATAZV8UeXBtkU7rsnvaLFZv6pnOMcsdNRlLK116KZd2k7ccTrG+Nacx9yPW6d1zZbfiLij4r8LK3xRX/ZZjruoQ1qQ9OiSAenHh40nMXW1udbz55LYCWfeQEfwGGhkoZUGgCkAAAAABJRU5ErkJggg=="/>
+            </div>
+        </div>
+        
+        <div class="choco--modes">
+            <div>
+                <label for="mode" class="choco--mode-select">Select Mode:</label>
+                <select id="mode">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <div>
+                <label for="theme" class="choco--mode-select">Challenge</label>
+                <select id="theme">
+                    <option value="white_chocolate">Time</option>
+                    <option value="dark_chocolate">Word</option>
+                    <option value="milk_chocolate">Quote</option>
+                </select>
+            </div>
+            <div>
+                <label for="theme" class="choco--mode-select">Timer</label>
+                <select id="theme">
+                    <option value="white_chocolate">10</option>
+                    <option value="dark_chocolate">25</option>
+                    <option value="milk_chocolate">50</option>
+                    <option value="milk_chocolate">100</option>
+                </select>
+            </div>
+            <div class="choco--theme">
+                <label for="theme" class="choco--mode-select">Theme:</label>
+                <select id="theme">
+                    <option value="white_chocolate">White</option>
+                    <option value="dark_chocolate">Dark</option>
+                    <option value="milk_chocolate">Milk</option>
+                </select>
+            </div>
+        </div>
     </header>
 
     <main>
-        <p id="word-display"></p>
+        <div class="choco-text--field">
+            <p id="word-display"></p>
+            <img class="choco-mascotte" src="assets/img/mascotte.png.PNG" alt="choco-mascotte">
+        </div>
         <input type="text" id="input-field" autofocus>
         <p id="results">Results : </p>
     </main>
 
-    <script src="script.js"></script>
 </body>
 
 </html>
