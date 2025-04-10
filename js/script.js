@@ -61,7 +61,8 @@ const getCurrentStats = () => {
     const wpm = (wordsToType[currentWordIndex].length / 5) / (elapsedTime / 60); // 5 chars = 1 word
     const accuracy = (wordsToType[currentWordIndex].length / inputField.value.length) * 100;
 
-    return { wpm: wpm.toFixed(2), accuracy: accuracy.toFixed(2) };
+    return { wpm: wpm.toFixed(2), accuracy: accuracy.toFixed(0)};
+
 };
 
 // Move to the next word and update stats only on spacebar press
@@ -71,7 +72,7 @@ const updateWord = (event) => {
             if (!previousEndTime) previousEndTime = startTime;
 
             const { wpm, accuracy } = getCurrentStats();
-            results.textContent = `WPM: ${wpm}, Accuracy: ${accuracy}%`;
+            results.textContent = `WPM: ${wpm} , Accuracy: ${accuracy}%`;
 
             currentWordIndex++;
             previousEndTime = Date.now();
@@ -91,7 +92,7 @@ const highlightNextWord = () => {
         if (currentWordIndex > 0) {
             wordElements[currentWordIndex - 1].style.color = "aliceblue";
         }
-        wordElements[currentWordIndex].style.color = "brown";
+        wordElements[currentWordIndex].style.color = "#c4a58c";
     }
 };
 
