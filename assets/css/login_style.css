@@ -88,6 +88,12 @@ main{
     color: var(--choco-white);
     font-size: 15px;
 }
+.toSignin{
+    margin-bottom: 1ch;
+}
+.toSignin a{
+    color: var(--choco-dark);
+}
 .toHome{
     text-decoration: none;
 }
@@ -105,11 +111,13 @@ main{
 .error i{
     width: 25px;  
     height: 25px;
+    color: var(--choco-white);
 }
 .error p{
     margin-inline: 1ch;
     font-size: 1rem;
     font-weight: 400;
+    color: var(--choco-white);
 }
 .login--right{
     width: 50%;
@@ -126,8 +134,10 @@ main{
     overflow: hidden;
 }
 .choco--login-img{
-
-    height: 76vh;
+    margin-top: 11ch;
+    margin-left: 13ch;
+    height: 70vh;
+    border-radius: 50%;
     animation: login--image--scale 2.5s infinite;
 }
 @keyframes login--image--scale {

@@ -76,7 +76,7 @@ nav{
     text-decoration: none;
     color: var(--text-color-one);
 }
-.choco-sign_in{
+.choco-sign_up{
     color: var(--choco-white);
     padding-inline: 2ch;
 }
@@ -143,7 +143,7 @@ nav{
 .choco-playground input{
     width: 80%;
     margin: auto;
-    margin-block-end: 7ch;
+    margin-block-end: 3ch;
     font-size: large;
     text-align: center;
     padding: 1.5ch;
@@ -152,6 +152,17 @@ nav{
     outline: none;
     background-color: var(--choco-white);
     color: var(--text-color-one);
+}
+.restart{
+    align-items: center;
+    color: var(--text-color-one);
+    margin: auto;
+    background-color: #b99b88d3;
+    padding-inline: 3ch;
+    padding-block: 1ch;
+    border-radius: 1ch;
+    margin-block-end: 3ch;
+    font-size: larger;
 }
 .choco--stats{
     display: flex;
@@ -170,9 +181,11 @@ footer{
     width: 100%;
     height: auto;
     text-align: center;
-    position: absolute;
     bottom: 0;
     font-size: 1rem;
     color: var(--choco-caramel);
     background-color: var(--choco-dark);
+}
+footer div{
+    bottom: 0;
 }

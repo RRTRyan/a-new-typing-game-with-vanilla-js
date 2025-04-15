@@ -1,0 +1,98 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: 'Fredoka One', sans-serif;
+}
+:root{
+    --choco-milk:#a07555;
+    --choco-dark: #4B2E2B;
+    --choco-white: #F4E3D7;
+    --choco-caramel: #8B7762;
+    --text-color-one:#221206;
+}
+::-webkit-scrollbar{
+    z-index: -111111111;
+    width: 1vw;
+}
+::-webkit-scrollbar-thumb{
+    background: gray;
+    border-radius: 10px;
+    z-index: -111111111;
+    position: fixed;
+    right: 0;
+}
+body{
+    background-color: var(--choco-caramel);
+}
+.signup--left{
+    width: 50%;
+    margin: auto;
+    background-color: var(--choco-white);
+    border: 4px solid var(--choco-dark);
+    border-radius: 3ch;
+    margin-block: 4ch;
+}
+.signup--content{
+    width: 70%;
+    margin: auto;
+    text-align: center;
+}
+.signup--img{
+    height: 10ch;
+    margin-top: 3ch;
+    margin-bottom: 1ch;
+    border:2px solid var(--choco-dark);
+    border-radius: 50%;
+}
+.signup--content h1{
+    font-size: 35px;
+    color: var(--text-color-one);
+}
+.signup--content p{
+    font-size: 17px;
+    margin-block: 1ch;
+}
+.signup--input{
+    background-color: rgb(221, 221, 221);
+    border: 2px solid var(--choco-dark);
+    padding: 1ch;
+    padding-left: 1ch;
+    width: 50%;
+    border-radius: 1ch;
+    display: flex;
+    margin-block:2ch;
+    margin-inline: auto;
+}
+#signup--icon{
+    width: 27px;
+    height: 27px;
+    align-items: center;
+    margin: auto;
+    justify-content: center;
+    color: #221206ce;
+}
+.signup--input input{
+    border: none;
+    background-color: transparent;
+    outline: none;
+    outline-color:transparent;
+    font-size: 17px;
+    margin-block: auto;
+    padding-left: 10px;
+    padding: auto;
+}
+.button{
+    padding: 2vh;
+    padding-inline: 3ch;
+    width: 11vw;
+    border-radius: 1ch;
+    border: none;
+    background-color: var(--text-color-one);
+    color: var(--choco-white);
+    font-size: 15px;
+    margin-bottom: 5ch;
+}
+button span{
+    padding-inline: 1ch;
+}
