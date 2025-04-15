@@ -8,13 +8,17 @@
 let startTime = null, previousEndTime = null;
 let currentWordIndex = 0;
 let pressCount = 0
+let isOngoing = true
+let totalChar = 0
 const wordsToType = [];
 
 const modeSelect = document.getElementById("mode");
 const timerSelect = document.getElementById("timer");
+const challengeSelect = document.getElementById("challenge");
 const wordDisplay = document.getElementById("word-display");
 const inputField = document.getElementById("input-field");
 const results = document.getElementById("results");
+const remaining = document.getElementById("remaining-words");
 
 const words = {
     easy: ["apple", "banana", "grape", "orange", "cherry"],
@@ -28,15 +32,7 @@ const getRandomWord = (mode) => {
     return wordList[Math.floor(Math.random() * wordList.length)];
 };
 
-// Initialize the typing test
-const startTest = (wordCount = timerSelect.value.match(/\d+/)) => {
-    wordsToType.length = 0; // Clear previous words
-    wordDisplay.innerHTML = ""; // Clear display
-    currentWordIndex = 0;
-    startTime = null;
-    previousEndTime = null;
-    pressCount = 0;
-
+const wordGeneration = (wordCount) => {
     for (let i = 0; i < wordCount; i++) {
         wordsToType.push(getRandomWord(modeSelect.value));
     }
@@ -47,21 +43,88 @@ const startTest = (wordCount = timerSelect.value.match(/\d+/)) => {
         if (index === 0) span.style.color = "red"; // Highlight first word
         wordDisplay.appendChild(span);
     });
+}
+
+// Initialize the typing test
+const startTest = (wordCount, challenge = challengeSelect.value) => {
+    wordsToType.length = 0; // Clear previous words
+    wordDisplay.innerHTML = ""; // Clear display
+    currentWordIndex = 0;
+    startTime = null;
+    previousEndTime = null;
+    pressCount = 0;
+    isOngoing = true;
+    totalChar = 0;
+
+    switch (challenge) {
+        case 'word':
+            remaining.innerText = Number(timerSelect.value.match(/\d+/));
+            wordCount = Number(timerSelect.value.match(/\d+/));
+            break;
+
+        case 'timer':
+            remaining.innerText = Math.round((timerSelect.value.match(/\d+/)));
+            wordCount = 10
+            break;
+
+        default: alert("duh")
+            break;
+    }
+
+    wordGeneration(wordCount)
 
     inputField.value = "";
     results.textContent = "";
 };
 
+const endTest = () => {
+    isOngoing = false;
+    if (!isOngoing) {
+        results.innerHTML += '<button style="display: block" id="restart-button"><p>Restart ?</p></button>'
+        document.getElementById("restart-button").addEventListener('click', () => {
+            startTest()
+        })
+    }
+}
+
 // Start the timer when user begins typing
-const startTimer = () => {
-    if (!startTime) startTime = Date.now();
+const startTimer = (event) => {
+    if (!startTime && (String(event.key).match(/^\S$/))) startTime = Date.now();
 };
+
+const showRemaining = (event, challenge = challengeSelect.value) => {
+    switch (challenge) {
+        case 'word':
+            if (event.key == ' ') {
+                remaining.innerText = wordDisplay.innerText.split(" ").length - currentWordIndex
+            }
+            if (remaining.innerText == 0) endTest()
+            break;
+
+        case 'timer':
+            if (pressCount == 0 && String(event.key).match(/^\S$/)) {
+                const remainingTime = setInterval(() => {
+                    remaining.innerText = Math.round((startTime + timerSelect.value.match(/\d+/) * 1000 - Date.now()) / 1000)
+                    if (remaining.innerText <= 0) {
+                        remaining.innerText = timerSelect.value.match(/\d+/)
+                        clearInterval(remainingTime)
+                        endTest()
+                    }
+                }, 1000)
+            }
+            break;
+
+        default: alert("Still working on it")
+            break;
+    }
+}
 
 // Calculate and return WPM & accuracy
 const getCurrentStats = () => {
     const elapsedTime = (Date.now() - previousEndTime) / 1000; // Seconds
     const wpm = (wordsToType[currentWordIndex].length / 5) / (elapsedTime / 60); // 5 chars = 1 word
-    const accuracy = (wordsToType.slice(0, currentWordIndex + 1).join("").length / pressCount) * 100;
+    totalChar += wordsToType[currentWordIndex].length
+    const accuracy = (totalChar / pressCount) * 100;
 
     return { wpm: wpm.toFixed(2), accuracy: accuracy.toFixed(2) };
 };
@@ -116,24 +179,36 @@ const statsEvolution = (wpm, accuracy) => {
 // Highlight the current word in red
 const highlightNextWord = () => {
     const wordElements = wordDisplay.children;
-    alert(wordDisplay.innerHTML)
-    if (currentWordIndex < wordElements.length) {
-        if (currentWordIndex > 0) {
+    if (currentWordIndex <= wordElements.length) {
+        if (currentWordIndex == wordElements.length) {
             wordElements[currentWordIndex - 1].style.color = "black";
+            if (challengeSelect.value = 'timer') {
+                wordDisplay.innerHTML = ''
+                currentWordIndex = 0;
+                wordsToType.length = 0;
+                wordGeneration(10);
+            }
+        } else if (currentWordIndex > 0) {
+            wordElements[currentWordIndex - 1].style.color = "black";
+            wordElements[currentWordIndex].style.color = "red";
         }
-        wordElements[currentWordIndex].style.color = "red";
     }
 };
 
 // Event listeners
 // Attach `updateWord` to `keydown` instead of `input`
 inputField.addEventListener("keydown", (event) => {
-    startTimer();
-    getPressCount(event)
-    updateWord(event);
+    if (isOngoing) {
+        startTimer(event);
+        updateWord(event);
+        showRemaining(event);
+        getPressCount(event);
+    }
 });
+
 modeSelect.addEventListener("change", () => startTest());
 timerSelect.addEventListener("change", () => startTest());
+challengeSelect.addEventListener("change", () => startTest());
 
 // Start the test
 startTest();

@@ -16,9 +16,24 @@
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
         </select>
+        <label for="challenge" class="choco--mode-select"><i class="fa-solid fa-hourglass-start"></i></label>
+        <select id="challenge">
+            <option value="timer">Time</option>
+            <option value="word">Word</option>
+            <option value="quote">Quote</option>
+        </select>
+        <label for="timer" class="choco--mode-select"><i class="fa-solid fa-clock"></i></label>
+        <select id="timer">
+            <option value="10sec">10</option>
+            <option value="25sec">25</option>
+            <option value="50sec">50</option>
+            <option value="100sec">100</option>
+        </select>
+
     </header>
 
     <main>
+        <p id="remaining-words"></p>
         <p id="word-display"></p>
         <input type="text" id="input-field" autofocus>
         <p id="results">Results : </p>
