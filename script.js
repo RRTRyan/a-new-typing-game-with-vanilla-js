@@ -11,6 +11,7 @@ let pressCount = 0
 const wordsToType = [];
 
 const modeSelect = document.getElementById("mode");
+const timerSelect = document.getElementById("timer");
 const wordDisplay = document.getElementById("word-display");
 const inputField = document.getElementById("input-field");
 const results = document.getElementById("results");
@@ -28,7 +29,7 @@ const getRandomWord = (mode) => {
 };
 
 // Initialize the typing test
-const startTest = (wordCount = 50) => {
+const startTest = (wordCount = timerSelect.value.match(/\d+/)) => {
     wordsToType.length = 0; // Clear previous words
     wordDisplay.innerHTML = ""; // Clear display
     currentWordIndex = 0;
@@ -115,7 +116,7 @@ const statsEvolution = (wpm, accuracy) => {
 // Highlight the current word in red
 const highlightNextWord = () => {
     const wordElements = wordDisplay.children;
-
+    alert(wordDisplay.innerHTML)
     if (currentWordIndex < wordElements.length) {
         if (currentWordIndex > 0) {
             wordElements[currentWordIndex - 1].style.color = "black";
@@ -132,6 +133,7 @@ inputField.addEventListener("keydown", (event) => {
     updateWord(event);
 });
 modeSelect.addEventListener("change", () => startTest());
+timerSelect.addEventListener("change", () => startTest());
 
 // Start the test
 startTest();
