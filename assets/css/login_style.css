@@ -1,0 +1,144 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: 'Fredoka One', sans-serif;
+}
+:root{
+    --choco-milk:#a07555;
+    --choco-dark: #4B2E2B;
+    --choco-white: #F4E3D7;
+    --choco-caramel: #b68367;
+    --text-color-one:#221206;
+}
+::-webkit-scrollbar{
+    z-index: -111111111;
+    width: 1vw;
+}
+::-webkit-scrollbar-thumb{
+    background: gray;
+    border-radius: 10px;
+    z-index: -111111111;
+    position: fixed;
+    right: 0;
+}
+body{
+    background-color: var(--choco-white);
+}
+main{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    height: 100vh;
+    overflow: hidden;
+}
+.login--left{
+    width: 50%;
+    margin: auto;
+}
+.login--content{
+    width: 70%;
+    margin: auto;
+    text-align: center;
+}
+.login--content h1{
+    font-size: 40px;
+    color: var(--text-color-one);
+}
+.login--content p{
+    font-size: 17px;
+    margin-block: 1ch;
+}
+.login--input{
+    background-color: rgb(221, 221, 221);
+    border: 1px solid var(--choco-dark);
+    padding: 1ch;
+    padding-left: 1ch;
+    width: 50%;
+    border-radius: 1ch;
+    display: flex;
+    margin-block:20px;
+    margin-inline: auto;
+}
+#login--icon{
+    width: 27px;
+    height: 27px;
+    align-items: center;
+    margin: auto;
+    justify-content: center;
+    color: #221206ce;
+}
+.login--input input{
+    border: none;
+    background-color: transparent;
+    outline: none;
+    outline-color:transparent;
+    font-size: 17px;
+    margin-block: auto;
+    padding-left: 10px;
+    padding: auto;
+}
+.button{
+    padding: 2vh;
+    padding-inline: 3ch;
+    width: 11vw;
+    border-radius: 1ch;
+    border: none;
+    background-color: var(--choco-dark);
+    color: var(--choco-white);
+    font-size: 15px;
+}
+.toHome{
+    text-decoration: none;
+}
+.error{
+    color: var(--white);
+    background-color: rgb(227, 67, 67);
+    border: 2px solid red;
+    justify-content: center;
+    margin: auto;
+    width: 20vw;
+    padding: 5px;
+    margin-top: 4vh;
+    display: none;
+}
+.error i{
+    width: 25px;  
+    height: 25px;
+}
+.error p{
+    margin-inline: 1ch;
+    font-size: 1rem;
+    font-weight: 400;
+}
+.login--right{
+    width: 50%;
+    background-color: var(--choco-milk);
+    overflow: hidden;
+}
+.login--background{
+    object-fit: cover;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+.choco--login-img{
+
+    height: 76vh;
+    animation: login--image--scale 2.5s infinite;
+}
+@keyframes login--image--scale {
+    0%{
+        transform: translateY(15px);
+    }
+    50%{
+        transform: translateY(0);
+    }
+    100%{
+        transform: translateY(15px);
+    }
+}
+

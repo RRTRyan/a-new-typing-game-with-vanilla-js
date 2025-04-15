@@ -60,7 +60,7 @@ nav{
 #choco-to-setting{
     color: var(--choco-white);
     font-size: 1.5rem;
-    margin-inline: 2ch;
+    margin-inline: 1ch;
 }
 .choco-settings button{
     padding: 1ch;
@@ -72,7 +72,14 @@ nav{
     color: var(--choco-dark);
     background-color: var(--choco-white);
 }
-
+.choco-settings button a{
+    text-decoration: none;
+    color: var(--text-color-one);
+}
+.choco-sign_in{
+    color: var(--choco-white);
+    padding-inline: 2ch;
+}
 .choco--modes{
     align-items: center;
     margin: 2ch;
@@ -163,6 +170,7 @@ footer{
     width: 100%;
     height: auto;
     text-align: center;
+    position: absolute;
     bottom: 0;
     font-size: 1rem;
     color: var(--choco-caramel);
