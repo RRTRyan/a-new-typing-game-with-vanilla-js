@@ -8,7 +8,7 @@
     --choco-milk:#a07555;
     --choco-dark: #4B2E2B;
     --choco-white: #F4E3D7;
-    --choco-caramel: #b68367;
+    --choco-caramel: #a0876c;
     --text-color-one:#221206;
 }
 ::-webkit-scrollbar{
@@ -32,6 +32,24 @@ main{
     height: 100vh;
     overflow: hidden;
 }
+.go-back{
+    position: absolute;
+    font-size: larger;
+    padding: 1ch; 
+}
+.go-back button{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: large;
+}
+.go-back i{
+    align-items: center;
+    background-color: var(--choco-dark);
+    padding: 1ch;
+    border-radius: 50%;
+    color: var(--choco-white);
+}
 .login--left{
     width: 50%;
     margin: auto;
@@ -51,7 +69,7 @@ main{
 }
 .login--input{
     background-color: rgb(221, 221, 221);
-    border: 1px solid var(--choco-dark);
+    border: 2px solid var(--choco-dark);
     padding: 1ch;
     padding-left: 1ch;
     width: 50%;
@@ -121,7 +139,7 @@ main{
 }
 .login--right{
     width: 50%;
-    background-color: var(--choco-milk);
+    background-color: var(--choco-caramel);
     overflow: hidden;
 }
 .login--background{
@@ -134,8 +152,11 @@ main{
     overflow: hidden;
 }
 .choco--login-img{
-    margin-top: 11ch;
-    margin-left: 13ch;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 8%; 
+    margin-right: 7%;
     height: 70vh;
     border-radius: 50%;
     animation: login--image--scale 2.5s infinite;

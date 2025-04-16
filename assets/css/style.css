@@ -8,7 +8,7 @@
     --choco-milk:#a07555;
     --choco-dark: #4B2E2B;
     --choco-white: #F4E3D7;
-    --choco-caramel: #b68367;
+    --choco-caramel: #a0876c;
     --text-color-one:#221206;
 }
 ::-webkit-scrollbar{
@@ -30,6 +30,9 @@
 body{
     background-color: var(--choco-white);
     height: 100vh;
+}
+.test{
+    display: none;
 }
 header{
     display: none;
@@ -155,9 +158,9 @@ nav{
 }
 .restart{
     align-items: center;
-    color: var(--text-color-one);
+    color: var(--choco-white);
     margin: auto;
-    background-color: #b99b88d3;
+    background-color: #6b5041d3;
     padding-inline: 3ch;
     padding-block: 1ch;
     border-radius: 1ch;
@@ -183,7 +186,7 @@ footer{
     text-align: center;
     bottom: 0;
     font-size: 1rem;
-    color: var(--choco-caramel);
+    color: var(--choco-white);
     background-color: var(--choco-dark);
 }
 footer div{

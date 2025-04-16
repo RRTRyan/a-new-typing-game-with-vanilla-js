@@ -8,7 +8,7 @@
     --choco-milk:#a07555;
     --choco-dark: #4B2E2B;
     --choco-white: #F4E3D7;
-    --choco-caramel: #8B7762;
+    --choco-caramel: #a0876c;
     --text-color-one:#221206;
 }
 ::-webkit-scrollbar{
@@ -32,6 +32,24 @@ body{
     border: 4px solid var(--choco-dark);
     border-radius: 3ch;
     margin-block: 4ch;
+}
+.go-back{
+    position: absolute;
+    font-size: larger;
+    padding: 1ch; 
+}
+.go-back button{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: large;
+}
+.go-back i{
+    align-items: center;
+    background-color: var(--choco-dark);
+    padding: 1ch;
+    border-radius: 50%;
+    color: var(--choco-white);
 }
 .signup--content{
     width: 70%;
