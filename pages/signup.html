@@ -11,6 +11,7 @@
     crossorigin="anonymous" 
     referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../assets/css/signup_style.css">
+    <script src="../js/signup-script.js" defer></script>
 </head>
 <body>
     <div class="signup--left">
@@ -20,25 +21,38 @@
         <div class="signup--content">
             <img class="signup--img" src="../assets/img/logo.jpeg" alt="logo">
             <h1>Sign up to ChocoType</h1>
-            <div class="signup--input">
-                <i class="fa-solid fa-circle-user" id="signup--icon"></i>
-                <input type="name" name="username" id="signup--username" placeholder="Username">
-            </div>
-            <div class="signup--input">
-                <i class="fa-solid fa-circle-user" id="signup--icon"></i>
-                <input type="email" name="email" id="signup--email" placeholder="Email">
-            </div>
-            <div class="signup--input">
-                <i class="fa-solid fa-lock" id="signup--icon"></i>
-                <input type="password" name="password" id="signup--password" placeholder="Password">
-            </div>
-            <div class="signup--input">
-                <i class="fa-solid fa-lock" id="signup--icon"></i>
-                <input type="password" name="password" id="signup--password" placeholder="Verify password">
-            </div>
-            <div class="toSignup">
-                <a href="#toHome" class="toHome"><button class="button"><i class="fa-solid fa-user-plus adduser"></i><span>Sign up</span></button></a>
-            </div>
+            <form class="signup--form" >
+                <div class="form--group">
+                    <div class="signup--input">
+                        <i class="fa-solid fa-circle-user" id="signup--icon"></i>
+                        <input type="text" name="username" id="signup--username" placeholder="Username" required>
+                    </div>
+                    <div class="error-message" id="usernameError"></div>
+                </div>
+                <div class="form--group">
+                    <div class="signup--input">
+                        <i class="fa-solid fa-circle-user" id="signup--icon"></i>
+                        <input type="email" name="email" id="signup--email" placeholder="Email" required>
+                    </div>
+                    <div class="error-message" id="emailError"></div>
+                </div>
+                <div class="form--group">
+                    <div class="signup--input">
+                        <i class="fa-solid fa-lock" id="signup--icon"></i>
+                        <input type="password" name="password" id="signup--password" placeholder="Password" required>
+                    </div>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+                <div class="form--group">
+                    <div class="signup--input">
+                        <i class="fa-solid fa-lock" id="signup--icon"></i>
+                        <input type="password" name="password" id="signup--conf-password" placeholder="Confirm password" required> 
+                    </div>
+                    <div class="error-message" id="confirmPasswordError"></div>
+                </div>
+                <button class="button" type="submit"><i class="fa-solid fa-user-plus adduser"></i><span>Sign up</span></button>
+                <div class="success-message" id="successMessage"></div>
+            </form>
         </div>
     </div>
 </body>

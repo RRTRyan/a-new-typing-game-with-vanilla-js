@@ -100,6 +100,20 @@ body{
     padding-left: 10px;
     padding: auto;
 }
+.form--group{
+    margin-bottom: ch;
+}
+.error-message {
+    color: red;
+    font-size: 1em;
+    margin-top: 5px;
+    display: none;
+}
+.success-message {
+    color: green;
+    font-size: 1em;
+    margin-top: 10px;
+}
 .button{
     padding: 2vh;
     padding-inline: 3ch;
