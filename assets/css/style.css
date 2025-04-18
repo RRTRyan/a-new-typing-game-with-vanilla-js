@@ -6,10 +6,10 @@
 }
 :root{
     --choco-milk:#a07555;
-    --choco-dark: #4B2E2B;
-    --choco-white: #F4E3D7;
-    --choco-caramel: #a0876c;
-    --text-color-one:#221206;
+    --choco-dark: #8e6d57 ;
+    --choco-background: #22160f;
+    --choco-white: #eaddd3;
+    --text-color-one:#281b13;
 }
 ::-webkit-scrollbar{
     z-index: -111111111;
@@ -28,11 +28,8 @@
     right: 0;
 }
 body{
-    background-color: var(--choco-white);
+    background-color: var(--choco-background);
     height: 100vh;
-}
-.test{
-    display: none;
 }
 header{
     display: none;
@@ -58,10 +55,10 @@ nav{
 }
 .choco-logo p{
     font-size: large;
-    color: var(--choco-white);
+    color: var(--choco-background);
 }
 #choco-to-setting{
-    color: var(--choco-white);
+    color: var(--choco-background);
     font-size: 1.5rem;
     margin-inline: 1ch;
 }
@@ -73,17 +70,20 @@ nav{
     border: 1px solid var(--choco-caramel);
     border-radius: 1ch;
     color: var(--choco-dark);
-    background-color: var(--choco-white);
+    background-color: var(--choco-background);
 }
 .choco-settings button a{
     text-decoration: none;
     color: var(--text-color-one);
 }
 .choco-sign_up{
-    color: var(--choco-white);
+    color: var(--choco-background);
     padding-inline: 2ch;
 }
 .choco--modes{
+    background-color: #8e6d57af;
+    padding: 1ch;
+    padding-inline: 2ch; 
     align-items: center;
     margin: 2ch;
     margin-inline: 5ch;
@@ -98,7 +98,7 @@ nav{
     border: none;
 }
 .choco--mode-select{
-    color: var(--choco-white);
+    color: var(--choco-background);
 }
 
 .choco-head{
@@ -137,10 +137,12 @@ nav{
     font-size: 2.5ch;
     padding-inline: 5ch;
     padding-block: 1ch;
+    padding-block-start: 3ch;
 }
 #word-display{
     font-size: 2.5ch;
-    text-align: center;
+    text-align: start;
+    padding-inline: 5ch;
     padding-bottom: 3ch;
     border-radius: 2ch;
     color: var(--text-color-one);
@@ -155,12 +157,12 @@ nav{
     border: none;
     border-radius: 1ch;
     outline: none;
-    background-color: var(--choco-white);
+    background-color: var(--choco-caramel);
     color: var(--text-color-one);
 }
 .restart{
     align-items: center;
-    color: var(--choco-white);
+    color: var(--choco-background);
     margin: auto;
     background-color: #6b5041d3;
     padding-inline: 3ch;
@@ -188,7 +190,7 @@ footer{
     text-align: center;
     bottom: 0;
     font-size: 1rem;
-    color: var(--choco-white);
+    color: var(--choco-background);
     background-color: var(--choco-dark);
 }
 footer div{
