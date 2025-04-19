@@ -5,11 +5,11 @@
     font-family: 'Fredoka One', sans-serif;
 }
 :root{
-    --choco-milk:#a07555;
-    --choco-dark: #8e6d57 ;
+    --choco-milk:#8f6b57;
+    --choco-dark: #4b2e2b ;
     --choco-background: #22160f;
-    --choco-white: #eaddd3;
-    --text-color-one:#281b13;
+    --choco-white: #f4e3d7;
+    --text-color-one:#25120d;
 }
 ::-webkit-scrollbar{
     z-index: -111111111;
@@ -28,7 +28,8 @@
     right: 0;
 }
 body{
-    background-color: var(--choco-background);
+    background-image: url(../img/background.PNG);
+    background-size: cover;
     height: 100vh;
 }
 header{
@@ -38,8 +39,8 @@ nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: auto;
-    background-color: var(--choco-dark);
+    height: 1.5cm;
+    background-color: var(--choco-milk);
 }
 .choco-logo{
     display: flex;
@@ -54,8 +55,11 @@ nav{
     object-fit: cover;
 }
 .choco-logo p{
-    font-size: large;
+    font-size: larger;
     color: var(--choco-background);
+}
+.choco-logo span{
+    color: var(--choco-white);
 }
 #choco-to-setting{
     color: var(--choco-background);
@@ -69,24 +73,24 @@ nav{
     outline: none;
     border: 1px solid var(--choco-caramel);
     border-radius: 1ch;
-    color: var(--choco-dark);
     background-color: var(--choco-background);
 }
 .choco-settings button a{
     text-decoration: none;
-    color: var(--text-color-one);
+    color: var(--choco-white);
 }
 .choco-sign_up{
-    color: var(--choco-background);
+    color: var(--choco-white);
     padding-inline: 2ch;
 }
 .choco--modes{
-    background-color: #8e6d57af;
+    background-color: #8e6d5765;
+    margin-inline: 10ch;
+    border-radius: 2ch;
     padding: 1ch;
-    padding-inline: 2ch; 
+    padding-inline: ch; 
     align-items: center;
-    margin: 2ch;
-    margin-inline: 5ch;
+    margin-block-end: 3ch;
     display: flex;
     justify-content: space-between;
 }
@@ -98,7 +102,7 @@ nav{
     border: none;
 }
 .choco--mode-select{
-    color: var(--choco-background);
+    color: var(--choco-white);
 }
 
 .choco-head{
@@ -109,7 +113,11 @@ nav{
     opacity: 90%;
 }
 .choco-head h1{
-    color: var(--choco-dark);
+    color: var(--choco-milk);
+}
+.choco-head span{
+    color: var(--choco-white);
+    opacity: 80%;
 }
 .choco-mascotte{
     height: 17ch;
@@ -121,31 +129,58 @@ nav{
     margin-block-end: 3ch;
 }
 .choco-playground{
-    width: 70%;
+    width: 100%;
     margin: auto;
 }
 .choco-text--field{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: block;
+    width: 80%;
+    flex-direction: row;
     margin: auto;
-    background-color: rgb(145, 114, 95);
+    background-color: rgba(168, 136, 117, 0.349);
     border-radius: 2ch;
-    border: 2px solid var(--choco-caramel);
+    border: 2px solid #eaddd38c;
+}
+.choco--start{
+    display: flex;
+}
+.choco--restart{
+    margin: auto;
+    align-items: center;
+    width: 100%;
+    margin-block: 2ch;
+}
+.choco--restart button{
+    padding-inline: 2ch;
+    padding-block: 1ch;
+    background-color:#22160fad;
+    opacity: 75%;
+    border: none;
+    outline: none;
+    border-radius: 2ch;
+}
+.choco--restart i{
+    font-size: larger;
+    color: var(--choco-white);
+}
+.choco--play{
+    margin-inline-start: 5ch;
+    width: 80%;
+    overflow: hidden;
 }
 #remaining-words{
+    color: var(--choco-white);
     font-size: 2.5ch;
-    padding-inline: 5ch;
     padding-block: 1ch;
     padding-block-start: 3ch;
 }
 #word-display{
     font-size: 2.5ch;
     text-align: start;
-    padding-inline: 5ch;
+    width: 100%;
     padding-bottom: 3ch;
     border-radius: 2ch;
-    color: var(--text-color-one);
+    color: rgba(31, 21, 5, 0.788);
 }
 .choco-playground input{
     width: 80%;
@@ -153,18 +188,18 @@ nav{
     margin-block-end: 3ch;
     font-size: large;
     text-align: center;
-    padding: 1.5ch;
+    padding: 1.2ch;
     border: none;
     border-radius: 1ch;
     outline: none;
-    background-color: var(--choco-caramel);
+    background-color: var(--choco-white);
     color: var(--text-color-one);
 }
 .restart{
     align-items: center;
     color: var(--choco-background);
     margin: auto;
-    background-color: #6b5041d3;
+    background-color: #6b5041bb;
     padding-inline: 3ch;
     padding-block: 1ch;
     border-radius: 1ch;
@@ -172,27 +207,28 @@ nav{
     font-size: larger;
 }
 .choco--stats{
-    display: flex;
+    width: 20%;
+    display: block;
+    padding-inline: 2ch;
+    margin-inline: 5ch;
+    margin-block: 3ch;
     flex-direction: column;
     justify-content: space-between;
-    margin: auto;
-    background-color: #91725f;
-    border-radius: 2ch;
+    background-color: var(--text-color-one);
+    border-radius: 10px;
 }
 #results{
+    width: 100%;
     display: flex;
     color: var(--text-color-one);
-    padding-block: 10ch;
+    padding-block: 3ch ;
 }
 footer{
     width: 100%;
     height: auto;
+    position: absolute;
     text-align: center;
-    bottom: 0;
     font-size: 1rem;
-    color: var(--choco-background);
-    background-color: var(--choco-dark);
-}
-footer div{
-    bottom: 0;
+    color: var(--choco-white);
+    background-color: var(--choco-milk);
 }
