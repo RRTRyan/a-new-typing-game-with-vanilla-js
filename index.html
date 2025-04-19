@@ -31,19 +31,20 @@
         <div class="choco-main">
             <div class="choco-playground">
                 <div class="choco--modes">
-                    <div>
-                        <p>Difficulty</p>
+                    <!-- <div>
+                        <p><i class="fa-solid fa-gamepad"></i></p>
                     </div>
                     <div>
-                        <p>Mode</p>
+                        <p><i class="fa-solid fa-font"></i></p>
                     </div>
                     <div>
-                        <p>Length</p>
+                        <p><i class="fa-solid fa-stopwatch-20"></i></p>
                     </div>
                     <div>
-                        <p>Style</p>
-                    </div>
+                        <p><i class="fa-solid fa-keyboard"></i></p>
+                    </div> -->
                     <div class="choco--difficulty">
+                        <span><i class="fa-solid fa-gamepad"></i></span>
                         <input type="radio" name="difficulty" id="mode--input-easy" value="easy" checked>
                         <label for="mode--input-easy" class="choco--mode-select">Easy</label>
                         <input type="radio" name="difficulty" id="mode--input-medium" value="medium">
@@ -57,12 +58,13 @@
                         </select> -->
                     </div>
                     <div class="choco--challenge">
-                        <input type="radio" name="challenge" id="mode--input-time" value="time">
-                        <label for="mode--input-time" class="choco--mode-select">Time</label>
+                        <input type="radio" name="challenge" id="mode--input-time" value="timer">
+                        <label for="mode--input-time" class="choco--mode-select"><i class="fa-solid fa-clock"></i><span> Time</span></label>
                         <input type="radio" name="challenge" id="mode--input-word" value="word">
-                        <label for="mode--input-word" class="choco--mode-select">Word</label checked>
+                        <label for="mode--input-word" class="choco--mode-select"><i class="fa-solid fa-font"></i><span> Word</span></label checked>
                     </div>
                     <div class="choco--length">
+                        <span><i class="fa-solid fa-stopwatch-20"></i></span>
                         <input type="radio" name="length" id="mode--input-short" value="10">
                         <label for="mode--input-short" class="choco--mode-select">10</label>
                         <input type="radio" name="length" id="mode--input-normal" value="25">
@@ -74,9 +76,9 @@
                     </div>
                     <div class="choco--style">
                         <input type="radio" name="style" id="mode--input-flexible" value="mt" checked>
-                        <label for="mode--input-flexible" class="choco--mode-select">Flexible</label>
+                        <label for="mode--input-flexible" class="choco--mode-select"><i class="fa-solid fa-keyboard"></i><span> Flexible</span></label>
                         <input type="radio" name="style" id="mode--input-strict" value="tr">
-                        <label for="mode--input-strict" class="choco--mode-select">Strict</label>
+                        <label for="mode--input-strict" class="choco--mode-select"><i class="fa-solid fa-car-side"></i><span> Strict</span></label>
                     </div>
                 </div>
                 <div class="choco--modes-responsive">
