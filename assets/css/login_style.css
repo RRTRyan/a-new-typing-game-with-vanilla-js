@@ -50,6 +50,8 @@ main{
     border-radius: 50%;
     color: var(--choco-white);
 }
+
+/*-------------left part of the login---------------*/
 .login--left{
     width: 50%;
     margin: auto;
@@ -137,6 +139,10 @@ main{
     font-weight: 400;
     color: var(--choco-white);
 }
+
+
+
+/*---------right part of the login----------*/
 .login--right{
     width: 50%;
     overflow: hidden;
@@ -172,7 +178,10 @@ main{
     }
 }
 
-@media screen and (max-width:800px) {
+
+
+/*-------------responsive design--------------*/
+@media screen and (max-width:1000px) {
  
     main{
         width: 100%;
@@ -218,7 +227,15 @@ main{
     .choco--login-img{
         margin-bottom: 0;
         height: 50vh;
-        bottom: -59vh;
-        right: -1vw;
+        bottom: -60vh;
+        right: 10vw;
+    }
+}
+@media (max-width:450px) {
+    .choco--login-img{
+        margin-bottom: 0;
+        height: 50vh;
+        bottom: -60vh;
+        right: -10vw;
     }
 }

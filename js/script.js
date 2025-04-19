@@ -94,7 +94,7 @@ const words = {
     hard: ["synchronize", "complicated", "development", "extravagant", "misconception"]
 };
 
-// Generate a random word from the selected mode
+
 const getRandomWord = (mode) => {
     const wordList = words[mode];
     return wordList[Math.floor(Math.random() * wordList.length)];
@@ -123,10 +123,10 @@ const wordGeneration = (wordCount, style = styleSelect) => {
     });
 }
 
-// Initialize the typing test
+
 const startTest = (wordCount, challenge = challengeSelect) => {
-    wordsToType.length = 0; // Clear previous words
-    wordDisplay.innerHTML = ""; // Clear display
+    wordsToType.length = 0;
+    wordDisplay.innerHTML = ""; 
 
     currentWordIndex = 0;
     currentLetterIndex = 0;
@@ -169,7 +169,6 @@ const endTest = () => {
     // }
 }
 
-// Start the timer when user begins typing
 const startTimer = (event) => {
     if (!startTime && (String(event.key).match(/^\S$/))) startTime = Date.now();
 };
@@ -204,7 +203,7 @@ const showRemaining = (event, challenge = challengeSelect) => {
     }
 }
 
-// Calculate and return WPM & accuracy
+/*-----------Calculate and return WPM & accuracy------------*/
 const getCurrentStats = () => {
     const elapsedTime = (Date.now() - previousEndTime) / 1000; // Seconds
     const wpm = (wordsToType[currentWordIndex].length / 5) / (elapsedTime / 60); // 5 chars = 1 word
@@ -215,7 +214,7 @@ const getCurrentStats = () => {
     return { wpm: wpm.toFixed(2), accuracy: accuracy.toFixed(2) };
 };
 
-// Count user key presses
+/*---------count user key presses---------*/
 const getPressCount = (event) => {
     if (String(event.key).match(/^\S$/)) { pressCount++ }
 }
@@ -289,9 +288,9 @@ const inputOverflow = (event, style) => {
     }
 }
 
-// Move to the next word and update stats only on spacebar press
+
 const updateWord = (event, style = styleSelect) => {
-    if (event.key === " ") { // Check if spacebar is pressed
+    if (event.key === " ") {
         if (inputField.value.trim() === wordsToType[currentWordIndex] || style == 'mt') {
             if (!previousEndTime) previousEndTime = startTime;
 
@@ -307,20 +306,20 @@ const updateWord = (event, style = styleSelect) => {
             previousEndTime = Date.now();
             highlightNextWord();
 
-            inputField.value = ""; // Clear input field after space
-            event.preventDefault(); // Prevent adding extra spaces
+            inputField.value = "";
+            event.preventDefault();
         }
     }
 };
 
-// Display results with color when changing
+
 const statsEvolution = (wpm, accuracy) => {
     if (!results.textContent) {
         results.innerHTML = `<div class="stats--wmp"><span class="stats--header">WPM:</span> <span class="stats--number">${wpm}</span></div>`
         results.innerHTML += `<div class="stats--accuracy"><span class="stats--header">Accuracy:</span> <span class="stats--number">${accuracy}%</span></div>`
     } else {
         let resultsCopy = results.textContent
-        const wpmPattern = (Number(resultsCopy.match(/[0-9]*\.?[0-9]*(?=A)/))) // Regexp for finding WPM old value
+        const wpmPattern = (Number(resultsCopy.match(/[0-9]*\.?[0-9]*(?=A)/)))
         if (wpmPattern > wpm) {
             results.innerHTML = `<div class="stats--wmp"><span class="stats--header">WPM:</span> <span class="stats--number" style='color: red'>${wpm}</span></div>`
         } else {
@@ -336,7 +335,6 @@ const statsEvolution = (wpm, accuracy) => {
     }
 }
 
-// Highlight the current word in red
 const highlightNextWord = (style = styleSelect) => {
     const wordElements = wordDisplay.children;
     if (currentWordIndex <= wordElements.length) {
@@ -360,13 +358,10 @@ const displayScroll = () => {
     console.log(Math.floor(wordElements[currentWordIndex].getBoundingClientRect().top - remaining.getBoundingClientRect().top))
     console.log(wordDisplay.scrollTop)
     if (Math.floor(wordElements[currentWordIndex].getBoundingClientRect().top) - remaining.getBoundingClientRect().top > 85) {
-        wordDisplay.style.scrollBehavior = 'smooth'
         wordDisplay.scrollTop = wordElements[currentWordIndex].getBoundingClientRect().top
     }
 }
 
-// Event listeners
-// Attach `updateWord` to `keydown` instead of `input`
 inputField.addEventListener("keydown", (event) => {
     if (isOngoing) {
         // displayScroll();
@@ -380,12 +375,11 @@ inputField.addEventListener("keydown", (event) => {
 
 restartButton.addEventListener('click', () => startTest());
 
-// Start the test
 startTest();
 
 
 
-
+/*------------responsive----------- */
 const toggleBtn = document.getElementById('options-toggle');
 const overlay = document.getElementById('overlay-menu');
 const closeBtn = document.getElementById('close-overlay');

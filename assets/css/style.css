@@ -68,23 +68,28 @@ nav{
     margin-inline: 1ch;
 }
 .choco-settings button{
-    padding: 1ch;
-    padding-inline: 2ch;
+    padding: 5px;
+    padding-inline: 1ch;
+    border:2px solid #442e2249;
     font-size: 1rem;
     outline: none;
-    border: 1px solid var(--choco-caramel);
     border-radius: 1ch;
     background-color: var(--choco-background);
 }
 .choco-settings button a{
     text-decoration: none;
+    font-size: 0.9em;
     color: var(--choco-white);
 }
 .choco-sign_up{
     color: var(--choco-white);
     padding-inline: 2ch;
+    font-size: 0.9em;
     margin-right: 2ch;
 }
+
+
+/*---------------navbar for modes-----------------*/
 .choco--modes{
     background-color: #8e6d5765;
     height: 2.5ch;
@@ -112,7 +117,6 @@ nav{
 .choco--modes-responsive{
     display: none;
 }
-
 .choco--modes > div {
     display: flex;
     flex-flow: row nowrap;
@@ -120,27 +124,34 @@ nav{
     align-items: center;
     width: 100%;
 }
-
 .choco--modes > div {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
-
 .choco--modes > div > p {
     color: #f4e3d7cc;
     padding-inline-start: 1ch;
     font-size: 1rem;
 }
-
 .choco--modes > div > input[type="radio"] {
     display: none;
 }
-
 .choco--modes > div > input[type="radio"]:checked + label {
     color: var(--choco-background);
     background-color: #f4e3d7d3;
     padding-inline: 1ch;
+    padding-block: 3px;
     border-radius: 5px;
 }
+.choco--modes label{
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+.choco--modes label:hover {
+    padding-inline: 1ch;
+    padding-block: 5px;
+    border-radius: 5px;
+    background-color: var(--choco-dark);
+} 
 .choco--difficulty{
     gap: 1ch;
 }
@@ -152,6 +163,7 @@ nav{
 }
 
 
+/*------------bottom logo-------------*/
 .choco-head{
     margin-block: 3ch;
     display: flex;
@@ -169,6 +181,8 @@ nav{
 .choco-mascotte{
     height: 17ch;
 }
+
+/*-----------playground field------------*/
 .choco-main{
     display: flex;
     flex-direction: row;
@@ -215,6 +229,7 @@ nav{
     color: var(--choco-white);
 }
 .choco--play{
+    /* display: none; */
     margin-inline-start: 5ch;
     width: 80%;
     overflow: hidden;
@@ -225,21 +240,25 @@ nav{
     padding-block: 1ch;
     padding-block-start: 3ch;
 }
-#word-display{
+#word-display {
     font-size: 2.5ch;
     text-align: start;
     width: 100%;
+    padding-inline: 1ch;
     padding-bottom: 3ch;
     border-radius: 2ch;
     color: rgba(31, 21, 5, 0.788);
+    height: 3em;
+    overflow-y: auto;
+    line-height:1.5em;
+    scroll-behavior: smooth;
+    margin-bottom: 1ch;
 }
-
-.word{
+.word {
     width: fit-content;
     display: inline-block;
     margin-right: 1ch;
 }
-
 .choco-playground input[type='text']{
     width: 80%;
     margin: auto;
@@ -253,9 +272,11 @@ nav{
     background-color: var(--choco-white);
     color: var(--text-color-one);
 }
+
+/*-----------results------------*/
 .choco--stats{
     width: 20%;
-    display: block;
+    /* display: none; */
     padding-inline: 2ch;
     margin-inline: 5ch;
     margin-block: 3ch;
@@ -265,11 +286,25 @@ nav{
     border-radius: 10px;
 }
 #results{
+    display: none;
     width: 100%;
     display: flex;
     color: var(--text-color-one);
     padding-block: 3ch ;
 }
+.choco--result div{
+    margin: 5ch;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.choco--result div span{
+    font-size: 10ch;
+    gap: 2ch;
+    color: var(--choco-white);
+}
+
+/*-------footer-------*/
 footer{
     width: 100%;
     height: auto;
@@ -280,6 +315,7 @@ footer{
     background-color: var(--choco-milk);
 }
 
+/*-------------responsive design-------------*/
 @media screen and (max-width:800px){
     .choco--modes{
         display: none;
@@ -328,6 +364,10 @@ footer{
         animation: fadeIn 0.3s ease;
         position: relative;
     }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    } 
     .close-overlay {
         position: absolute;
         top: 1ch;
@@ -366,12 +406,7 @@ footer{
     }
     .option-buttons button:hover {
         background-color: var(--choco-dark);
-    }  
-    @keyframes fadeIn {
-        from { opacity: 0; transform: scale(0.95); }
-        to { opacity: 1; transform: scale(1); }
-    }    
-    
+    }   
     body{
         height: auto;
     }
@@ -391,4 +426,41 @@ footer{
     .choco--play{
         width: 80%;
     }
+}
+
+/*---------for logged pages---------*/
+.choco-logged-settings{
+    display: flex;
+    flex-direction: row;
+    gap: 2ch;
+}
+.choco-logged-settings button{
+    padding: 1ch;
+    padding-inline: 2ch;
+    border:2px solid #442e2249;
+    font-size: 0.8rem;
+    outline: none;
+    border-radius: 1ch;
+    margin-inline-end: 3ch;
+    background-color: var(--choco-background);
+}
+.choco-logged-settings button a{
+    text-decoration: none;
+    color: var(--choco-white);
+}
+.choco--account{
+    align-items: center;
+    display: flex;
+    margin-inline-end: 2ch;
+    cursor: pointer;
+}
+.choco--account p{
+    color: var(--text-color-one);
+    font-size: 0.9em;
+}
+.choco--account img{
+    height: 4ch;
+    object-fit: cover;
+    border-radius: 50%;
+    padding-inline: 1ch;
 }

@@ -9,7 +9,7 @@ button.addEventListener("click",(e)=>{
     button.style.width="10ch";
     toLoad.textContent=".....";
     
-    if(email.value!="antsa@gmail.com" || pwd.value!="1234"){
+    if(email.value!="admin@gmail.com" || pwd.value!="admin"){
         e.preventDefault();
         setTimeout(()=>{
             button.style.width="15ch";
@@ -24,14 +24,14 @@ button.addEventListener("click",(e)=>{
         },3000)
     }
 
-    if(email.value=="antsa@gmail.com" && pwd.value=="1234"){
+    if(email.value=="admin@gmail.com" && pwd.value=="admin"){
         setTimeout((e)=>{
             e.preventDefault();
             button.style.width="10ch";
             toLoad.textContent=".....";
         },2000);
         setTimeout(()=>{
-            window.location.href="../index.html"
+            window.location.href="../pages/admin.html"
         },1000) 
     }
 })
