@@ -9,7 +9,7 @@ button.addEventListener("click",(e)=>{
     button.style.width="10ch";
     toLoad.textContent=".....";
     
-    if(email.value!="admin@gmail.com" || pwd.value!="admin"){
+    if(email.value!="admin@gmail.com" || pwd.value!="Admin123"){
         e.preventDefault();
         setTimeout(()=>{
             button.style.width="15ch";
