@@ -94,7 +94,7 @@ nav{
     justify-items: center;
     margin-bottom: 3ch;
     display: grid;
-    grid-template-columns: 1fr .5fr 1fr 1fr;
+    grid-template-columns: minmax(100px, 1fr) minmax(100px, 1fr) minmax(100px, 1fr) minmax(100px, 1fr);
     grid-template-rows: 25px 20px;
     gap: 1px 20px;
 }
@@ -218,6 +218,13 @@ nav{
     border-radius: 2ch;
     color: rgba(31, 21, 5, 0.788);
 }
+
+.word{
+    width: fit-content;
+    display: inline-block;
+    margin-right: 1ch;
+}
+
 .choco-playground input[type='text']{
     width: 80%;
     margin: auto;

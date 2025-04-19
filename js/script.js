@@ -37,7 +37,7 @@ hardDifficulty.addEventListener('change', () => {
 
 const timerMode = document.getElementById('mode--input-time');
 const wordMode = document.getElementById('mode--input-word');
-let challengeSelect = wordMode.value 
+let challengeSelect = wordMode.value
 timerMode.addEventListener('change', () => {
     challengeSelect = timerMode.value
     startTest()
@@ -51,7 +51,7 @@ const shortLength = document.getElementById('mode--input-short');
 const mediumLength = document.getElementById('mode--input-normal');
 const longLength = document.getElementById('mode--input-long');
 const longerLength = document.getElementById('mode--input-longer');
-let lengthSelect = mediumLength.value 
+let lengthSelect = mediumLength.value
 shortLength.addEventListener('change', () => {
     lengthSelect = shortLength.value
     startTest()
@@ -71,7 +71,7 @@ longerLength.addEventListener('change', () => {
 
 const flexibleStyle = document.getElementById('mode--input-flexible');
 const strictStyle = document.getElementById('mode--input-strict');
-let styleSelect = flexibleStyle.value 
+let styleSelect = flexibleStyle.value
 flexibleStyle.addEventListener('change', () => {
     styleSelect = flexibleStyle.value
     startTest()
@@ -106,7 +106,7 @@ const wordGeneration = (wordCount, style = styleSelect) => {
     }
 
     wordsToType.forEach((word, wordIndex) => {
-        const fullWord = document.createElement('span');
+        const fullWord = document.createElement('div');
         fullWord.classList.add('word')
         word.split('').forEach((letter, letterIndex) => {
             const letterSpan = document.createElement('span')
@@ -116,7 +116,7 @@ const wordGeneration = (wordCount, style = styleSelect) => {
             }
             fullWord.appendChild(letterSpan);
         })
-        if (wordIndex != wordsToType.length - 1) { fullWord.innerHTML += ' ' }
+        if (wordIndex != wordsToType.length - 1) { fullWord.innerHTML += '' }
         fullWord.style.color = '#9B867A'
         if (wordIndex === 0 && style != 'mt') fullWord.style.color = "orange"; // Highlight first word
         wordDisplay.appendChild(fullWord);
@@ -178,7 +178,7 @@ const showRemaining = (event, challenge = challengeSelect) => {
     switch (challenge) {
         case 'word':
             if (event.key == ' ') {
-                remaining.innerText = wordDisplay.innerText.split(" ").length - currentWordIndex
+                remaining.innerText = wordDisplay.innerHTML.split("word").length - currentWordIndex - 1
             }
             if (remaining.innerText == 0) endTest()
             break;
@@ -226,19 +226,20 @@ const isLetterCorrect = (event, style = styleSelect) => {
         if ((event.key.match(/^\S$/) == wordsToType[currentWordIndex][currentLetterIndex])) {
             correctInput++
             currentLetterIndex++
-            console.log(correctInput)
             if (style == 'mt') {
                 wordLetters[currentWordIndex].children[currentLetterIndex - 1].style.color = '#ffffff'
+                wordLetters[currentWordIndex].children[currentLetterIndex - 1].classList.add('typed-letter')
                 if (currentLetterIndex - 1 != wordsToType[currentWordIndex].length - 1) wordLetters[currentWordIndex].children[currentLetterIndex].style.color = 'orange'
             }
         } else if (event.key.match(/^\S$/)) {
             currentLetterIndex++
             if (style == 'mt') {
                 wordLetters[currentWordIndex].children[currentLetterIndex - 1].style.color = 'red'
+                wordLetters[currentWordIndex].children[currentLetterIndex - 1].classList.add('typed-letter')
                 if (currentLetterIndex != wordsToType[currentWordIndex].length) wordLetters[currentWordIndex].children[currentLetterIndex].style.color = 'orange'
             }
         }
-    } // else inputOverflow(event, style)
+    } else inputOverflow(event, style)
     inputBackspace(event, style)
 
 }
@@ -249,32 +250,44 @@ const inputBackspace = (event, style) => {
         if (style == 'mt') wordLetters[currentWordIndex].children[currentLetterIndex].style.color = ''
         if (currentLetterIndex == 0 && currentWordIndex > 0) {
             currentWordIndex--
-            currentLetterIndex = wordsToType[currentWordIndex].length - 1
-            if (style == 'mt') { wordLetters[currentWordIndex].children[currentLetterIndex].style.color = 'orange' }
+            currentLetterIndex = (wordLetters[currentWordIndex].innerHTML.split(/typed-letter/).length + wordLetters[currentWordIndex].innerHTML.split(/overflowLetter/).length - 3)
+            if (style == 'mt' && currentLetterIndex < wordsToType[currentWordIndex].length) {
+                wordLetters[currentWordIndex].children[currentLetterIndex].style.color = 'orange'
+                wordLetters[currentWordIndex + 1].children[0].classList.remove('typed-letter')
+            }
         } else if (currentLetterIndex > 0 && currentWordIndex >= 0) {
             currentLetterIndex--
-            if (style == 'mt') { wordLetters[currentWordIndex].children[currentLetterIndex].style.color = 'orange' }
+            if (style == 'mt') {
+                wordLetters[currentWordIndex].children[currentLetterIndex].style.color = 'orange'
+                wordLetters[currentWordIndex].children[currentLetterIndex].classList.remove('typed-letter')
+            }
         } else if (currentLetterIndex == 0 && currentWordIndex == 0) {
-            wordLetters[currentWordIndex].children[currentLetterIndex].style.textDecoration = 'underline'
-            if (style == 'mt') { wordLetters[currentWordIndex].children[currentLetterIndex].style.color = 'orange' }
+            if (style == 'mt') {
+                wordLetters[currentWordIndex].children[currentLetterIndex].style.color = 'orange'
+                wordLetters[currentWordIndex].children[currentLetterIndex].classList.remove('typed-letter')
+            }
         }
     } else if (event.key === 'Backspace') {
         currentLetterIndex--
-        // wordLetters[currentWordIndex].children[currentLetterIndex - 1].children[0].remove('span')
+        if (currentLetterIndex + 1 > wordsToType[currentWordIndex].length) wordLetters[currentWordIndex].lastChild.remove('span')
         if (style == 'mt' && currentLetterIndex + 1 == wordsToType[currentWordIndex].length) { wordLetters[currentWordIndex].children[currentLetterIndex].style.color = 'orange' }
     }
+    console.log(currentLetterIndex)
+    console.log(wordLetters[currentWordIndex].innerHTML.split(/typed-letter/).length + wordLetters[currentWordIndex].innerHTML.split(/overflowLetter/).length - 3)
+    // console.log(wordLetters[currentWordIndex].children[currentLetterIndex - 1].outerHTML)
 }
 
-// const inputOverflow = (event, style) => {
-//     const wordLetters = wordDisplay.children;
-//     if (event.key.match(/^\S$/) && currentLetterIndex >= wordsToType[currentWordIndex].length && style == 'mt') {
-//         const overflowLetter = document.createElement('span');
-//         overflowLetter.textContent = event.key
-//         console.log(currentLetterIndex)
-//         wordLetters[currentWordIndex].children[currentLetterIndex - 1].appendChild(overflowLetter)
-//         currentLetterIndex++
-//     }
-// }
+const inputOverflow = (event, style) => {
+    const wordLetters = wordDisplay.children;
+    if (event.key.match(/^\S$/) && currentLetterIndex >= wordsToType[currentWordIndex].length && style == 'mt') {
+        const overflowLetter = document.createElement('span');
+        overflowLetter.textContent = event.key
+        overflowLetter.classList.add('overflowLetter')
+        overflowLetter.style.color = 'red'
+        wordLetters[currentWordIndex].appendChild(overflowLetter)
+        currentLetterIndex++
+    }
+}
 
 // Move to the next word and update stats only on spacebar press
 const updateWord = (event, style = styleSelect) => {
@@ -328,7 +341,7 @@ const highlightNextWord = (style = styleSelect) => {
     const wordElements = wordDisplay.children;
     if (currentWordIndex <= wordElements.length) {
         if (currentWordIndex == wordElements.length) {
-            wordElements[currentWordIndex - 1].style.color = "black";
+            wordElements[currentWordIndex - 1].style.color = "#ffffff";
             if (challengeSelect == 'timer') {
                 wordDisplay.innerHTML = ''
                 currentWordIndex = 0;
@@ -336,7 +349,7 @@ const highlightNextWord = (style = styleSelect) => {
                 wordGeneration(10);
             }
         } else if (currentWordIndex > 0) {
-            if (style != 'mt') wordElements[currentWordIndex - 1].style.color = "black";
+            if (style != 'mt') wordElements[currentWordIndex - 1].style.color = "#ffffff";
             (style != 'mt') ? wordElements[currentWordIndex].style.color = "orange" : wordElements[currentWordIndex].children[0].style.color = "orange";
         }
     }
