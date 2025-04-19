@@ -87,8 +87,9 @@ nav{
 }
 .choco--modes{
     background-color: #8e6d5765;
-    margin-inline: 25%;
-    border-radius: 30px;
+    height: 2.5ch;
+    margin-inline: 15%;
+    border-radius: 20px;
     padding: 1ch;
     align-items: center;
     justify-items: center;
@@ -96,7 +97,7 @@ nav{
     display: grid;
     grid-template-columns: minmax(100px, 1fr) minmax(100px, 1fr) minmax(100px, 1fr) minmax(100px, 1fr);
     grid-template-rows: 25px 20px;
-    gap: 1px 20px;
+    gap: 5px 25px;
 }
 .choco--modes select{
     height: 3ch;
@@ -115,16 +116,18 @@ nav{
 .choco--modes > div {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    align-items: center;
     width: 100%;
 }
 
 .choco--modes > div {
- font-size: .9rem;
+    font-size: 0.9rem;
 }
 
 .choco--modes > div > p {
-    color: black;
+    color: #f4e3d7cc;
+    padding-inline-start: 1ch;
     font-size: 1rem;
 }
 
@@ -134,6 +137,18 @@ nav{
 
 .choco--modes > div > input[type="radio"]:checked + label {
     color: var(--choco-background);
+    background-color: #f4e3d7d3;
+    padding-inline: 1ch;
+    border-radius: 5px;
+}
+.choco--difficulty{
+    gap: 1ch;
+}
+.choco--modes div span i{
+    color: #eaddd3cc;
+    background-color: #22160f27;
+    padding: 1ch;
+    border-radius: 50%;
 }
 
 
