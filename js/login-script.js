@@ -24,8 +24,7 @@ button.addEventListener("click",(e)=>{
         },3000)
     }
 
-    if(email.value=="admin@gmail.com" && pwd.value=="Admin123
-    "){
+    if(email.value=="admin@gmail.com" && pwd.value=="Admin123"){
         setTimeout((e)=>{
             e.preventDefault();
             button.style.width="10ch";
