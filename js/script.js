@@ -8,7 +8,7 @@
 let startTime = null, previousEndTime = null;
 let currentWordIndex = 0;
 let currentLetterIndex = 0;
-let isOngoing = true
+let isOngoing = false
 
 let pressCount = 0
 let totalChar = 0
@@ -18,14 +18,75 @@ const wpmHistory = []
 
 const wordsToType = [];
 
-const modeSelect = document.getElementById("mode");
-const timerSelect = document.getElementById("timer");
-const challengeSelect = document.getElementById("challenge");
-const styleSelect = document.getElementById("style");
+const easyDifficulty = document.getElementById('mode--input-easy');
+const mediumDifficulty = document.getElementById('mode--input-medium');
+const hardDifficulty = document.getElementById('mode--input-hard');
+let difficultySelect = easyDifficulty.value
+easyDifficulty.addEventListener('change', () => {
+    difficultySelect = easyDifficulty.value
+    startTest()
+})
+mediumDifficulty.addEventListener('change', () => {
+    difficultySelect = mediumDifficulty.value
+    startTest()
+})
+hardDifficulty.addEventListener('change', () => {
+    difficultySelect = hardDifficulty.value
+    startTest()
+})
+
+const timerMode = document.getElementById('mode--input-time');
+const wordMode = document.getElementById('mode--input-word');
+let challengeSelect = wordMode.value 
+timerMode.addEventListener('change', () => {
+    challengeSelect = timerMode.value
+    startTest()
+})
+wordMode.addEventListener('change', () => {
+    challengeSelect = wordMode.value
+    startTest()
+})
+
+const shortLength = document.getElementById('mode--input-short');
+const mediumLength = document.getElementById('mode--input-normal');
+const longLength = document.getElementById('mode--input-long');
+const longerLength = document.getElementById('mode--input-longer');
+let lengthSelect = mediumLength.value 
+shortLength.addEventListener('change', () => {
+    lengthSelect = shortLength.value
+    startTest()
+})
+mediumLength.addEventListener('change', () => {
+    lengthSelect = mediumLength.value
+    startTest()
+})
+longLength.addEventListener('change', () => {
+    lengthSelect = longLength.value
+    startTest()
+})
+longerLength.addEventListener('change', () => {
+    lengthSelect = longerLength.value
+    startTest()
+})
+
+const flexibleStyle = document.getElementById('mode--input-flexible');
+const strictStyle = document.getElementById('mode--input-strict');
+let styleSelect = flexibleStyle.value 
+flexibleStyle.addEventListener('change', () => {
+    styleSelect = flexibleStyle.value
+    startTest()
+})
+strictStyle.addEventListener('change', () => {
+    styleSelect = strictStyle.value
+    startTest()
+})
+
+
 const wordDisplay = document.getElementById("word-display");
 const inputField = document.getElementById("input-field");
 const results = document.getElementById("results");
 const remaining = document.getElementById("remaining-words");
+const restartButton = document.querySelector('.choco--restart')
 
 const words = {
     easy: ["apple", "banana", "grape", "orange", "cherry"],
@@ -39,13 +100,14 @@ const getRandomWord = (mode) => {
     return wordList[Math.floor(Math.random() * wordList.length)];
 };
 
-const wordGeneration = (wordCount, style = styleSelect.value) => {
+const wordGeneration = (wordCount, style = styleSelect) => {
     for (let i = 0; i < wordCount; i++) {
-        wordsToType.push(getRandomWord(modeSelect.value));
+        wordsToType.push(getRandomWord(difficultySelect));
     }
 
     wordsToType.forEach((word, wordIndex) => {
         const fullWord = document.createElement('span');
+        fullWord.classList.add('word')
         word.split('').forEach((letter, letterIndex) => {
             const letterSpan = document.createElement('span')
             letterSpan.textContent = letter
@@ -55,13 +117,14 @@ const wordGeneration = (wordCount, style = styleSelect.value) => {
             fullWord.appendChild(letterSpan);
         })
         if (wordIndex != wordsToType.length - 1) { fullWord.innerHTML += ' ' }
+        fullWord.style.color = '#9B867A'
         if (wordIndex === 0 && style != 'mt') fullWord.style.color = "orange"; // Highlight first word
         wordDisplay.appendChild(fullWord);
     });
 }
 
 // Initialize the typing test
-const startTest = (wordCount, challenge = challengeSelect.value) => {
+const startTest = (wordCount, challenge = challengeSelect) => {
     wordsToType.length = 0; // Clear previous words
     wordDisplay.innerHTML = ""; // Clear display
 
@@ -76,15 +139,16 @@ const startTest = (wordCount, challenge = challengeSelect.value) => {
     correctInput = 0;
     invalidInput = 0;
     wpmHistory.length = 0
+    wordDisplay.scrollTop = 0
 
     switch (challenge) {
         case 'word':
-            remaining.innerText = Number(timerSelect.value.match(/\d+/));
-            wordCount = Number(timerSelect.value.match(/\d+/));
+            remaining.innerText = Number(lengthSelect.match(/\d+/));
+            wordCount = Number(lengthSelect.match(/\d+/));
             break;
 
         case 'timer':
-            remaining.innerText = Math.round((timerSelect.value.match(/\d+/)));
+            remaining.innerText = Math.round((lengthSelect.match(/\d+/)));
             wordCount = 10
             break;
 
@@ -100,13 +164,9 @@ const startTest = (wordCount, challenge = challengeSelect.value) => {
 
 const endTest = () => {
     isOngoing = false;
-    if (!isOngoing) {
-        results.innerHTML += `<button style="display: block" id="restart-button"><p>Restart ?</p></button>`
-        if (wpmHistory != []) results.innerHTML += `<p>${(wpmHistory.reduce((a, b) => a + b) / wpmHistory.length).toFixed(2)}</p>`
-        document.getElementById("restart-button").addEventListener('click', () => {
-            startTest()
-        })
-    }
+    // if (!isOngoing) {
+    //     if (wpmHistory.length != 0) results.innerHTML += `<p>${(wpmHistory.reduce((a, b) => a + b) / wpmHistory.length).toFixed(2)}</p>`
+    // }
 }
 
 // Start the timer when user begins typing
@@ -114,7 +174,7 @@ const startTimer = (event) => {
     if (!startTime && (String(event.key).match(/^\S$/))) startTime = Date.now();
 };
 
-const showRemaining = (event, challenge = challengeSelect.value) => {
+const showRemaining = (event, challenge = challengeSelect) => {
     switch (challenge) {
         case 'word':
             if (event.key == ' ') {
@@ -126,11 +186,14 @@ const showRemaining = (event, challenge = challengeSelect.value) => {
         case 'timer':
             if (pressCount == 0 && String(event.key).match(/^\S$/)) {
                 const remainingTime = setInterval(() => {
-                    remaining.innerText = Math.round((startTime + timerSelect.value.match(/\d+/) * 1000 - Date.now()) / 1000)
-                    if (remaining.innerText <= 0) {
-                        remaining.innerText = timerSelect.value.match(/\d+/)
+                    remaining.innerText = Math.round((startTime + lengthSelect.match(/\d+/) * 1000 - Date.now()) / 1000)
+                    if (remaining.innerText == 0) {
+                        if (remaining.innerText == 0) remaining.innerText = 0
                         clearInterval(remainingTime)
                         endTest()
+                    } else if (remaining.innerText < 0) {
+                        clearInterval(remainingTime)
+                        remaining.innerText = lengthSelect.match(/\d+/)
                     }
                 }, 1000)
             }
@@ -157,15 +220,16 @@ const getPressCount = (event) => {
     if (String(event.key).match(/^\S$/)) { pressCount++ }
 }
 
-const isLetterCorrect = (event, style = styleSelect.value) => {
+const isLetterCorrect = (event, style = styleSelect) => {
     const wordLetters = wordDisplay.children;
     if (currentLetterIndex < wordsToType[currentWordIndex].length) {
         if ((event.key.match(/^\S$/) == wordsToType[currentWordIndex][currentLetterIndex])) {
             correctInput++
             currentLetterIndex++
+            console.log(correctInput)
             if (style == 'mt') {
-                wordLetters[currentWordIndex].children[currentLetterIndex - 1].style.color = 'green'
-                if (currentLetterIndex != wordsToType[currentWordIndex].length) wordLetters[currentWordIndex].children[currentLetterIndex].style.color = 'orange'
+                wordLetters[currentWordIndex].children[currentLetterIndex - 1].style.color = '#ffffff'
+                if (currentLetterIndex - 1 != wordsToType[currentWordIndex].length - 1) wordLetters[currentWordIndex].children[currentLetterIndex].style.color = 'orange'
             }
         } else if (event.key.match(/^\S$/)) {
             currentLetterIndex++
@@ -174,9 +238,7 @@ const isLetterCorrect = (event, style = styleSelect.value) => {
                 if (currentLetterIndex != wordsToType[currentWordIndex].length) wordLetters[currentWordIndex].children[currentLetterIndex].style.color = 'orange'
             }
         }
-    } else {
-        if (event.key.match(/^\S$/)) { currentLetterIndex++ }
-    }
+    } // else inputOverflow(event, style)
     inputBackspace(event, style)
 
 }
@@ -184,7 +246,7 @@ const isLetterCorrect = (event, style = styleSelect.value) => {
 const inputBackspace = (event, style) => {
     const wordLetters = wordDisplay.children;
     if (event.key === 'Backspace' && currentLetterIndex >= 0 && currentLetterIndex < wordsToType[currentWordIndex].length) {
-        if (style == 'mt') wordLetters[currentWordIndex].children[currentLetterIndex].style.color = 'gray'
+        if (style == 'mt') wordLetters[currentWordIndex].children[currentLetterIndex].style.color = ''
         if (currentLetterIndex == 0 && currentWordIndex > 0) {
             currentWordIndex--
             currentLetterIndex = wordsToType[currentWordIndex].length - 1
@@ -192,15 +254,30 @@ const inputBackspace = (event, style) => {
         } else if (currentLetterIndex > 0 && currentWordIndex >= 0) {
             currentLetterIndex--
             if (style == 'mt') { wordLetters[currentWordIndex].children[currentLetterIndex].style.color = 'orange' }
+        } else if (currentLetterIndex == 0 && currentWordIndex == 0) {
+            wordLetters[currentWordIndex].children[currentLetterIndex].style.textDecoration = 'underline'
+            if (style == 'mt') { wordLetters[currentWordIndex].children[currentLetterIndex].style.color = 'orange' }
         }
     } else if (event.key === 'Backspace') {
         currentLetterIndex--
+        // wordLetters[currentWordIndex].children[currentLetterIndex - 1].children[0].remove('span')
         if (style == 'mt' && currentLetterIndex + 1 == wordsToType[currentWordIndex].length) { wordLetters[currentWordIndex].children[currentLetterIndex].style.color = 'orange' }
     }
 }
 
+// const inputOverflow = (event, style) => {
+//     const wordLetters = wordDisplay.children;
+//     if (event.key.match(/^\S$/) && currentLetterIndex >= wordsToType[currentWordIndex].length && style == 'mt') {
+//         const overflowLetter = document.createElement('span');
+//         overflowLetter.textContent = event.key
+//         console.log(currentLetterIndex)
+//         wordLetters[currentWordIndex].children[currentLetterIndex - 1].appendChild(overflowLetter)
+//         currentLetterIndex++
+//     }
+// }
+
 // Move to the next word and update stats only on spacebar press
-const updateWord = (event, style = styleSelect.value) => {
+const updateWord = (event, style = styleSelect) => {
     if (event.key === " ") { // Check if spacebar is pressed
         if (inputField.value.trim() === wordsToType[currentWordIndex] || style == 'mt') {
             if (!previousEndTime) previousEndTime = startTime;
@@ -226,49 +303,60 @@ const updateWord = (event, style = styleSelect.value) => {
 // Display results with color when changing
 const statsEvolution = (wpm, accuracy) => {
     if (!results.textContent) {
-        results.textContent = `WPM: ${wpm}, Accuracy: ${accuracy}%`;
+        results.innerHTML = `<div class="stats--wmp"><span class="stats--header">WPM:</span> <span class="stats--number">${wpm}</span></div>`
+        results.innerHTML += `<div class="stats--accuracy"><span class="stats--header">Accuracy:</span> <span class="stats--number">${accuracy}%</span></div>`
     } else {
         let resultsCopy = results.textContent
-
-        const wpmPattern = (Number(resultsCopy.match(/[0-9]*\.?[0-9]*(?=,)/))) // Regexp for finding WPM old value
+        const wpmPattern = (Number(resultsCopy.match(/[0-9]*\.?[0-9]*(?=A)/))) // Regexp for finding WPM old value
         if (wpmPattern > wpm) {
-            results.innerHTML = `WPM: <span style='color: red'>${wpm}</span>`
+            results.innerHTML = `<div class="stats--wmp"><span class="stats--header">WPM:</span> <span class="stats--number" style='color: red'>${wpm}</span></div>`
         } else {
-            results.innerHTML = `WPM: <span style='color: green'>${wpm}</span>`
+            results.innerHTML = `<div class="stats--wmp"><span class="stats--header">WPM:</span> <span class="stats--number" style='color: green'>${wpm}</span></div>`
         }
 
         const accuracyPattern = (Number(resultsCopy.match(/[0-9]*\.?[0-9]*(?=%)/)))
         if (accuracyPattern > accuracy) {
-            results.innerHTML += `, Accuracy: <span style='color: red'>${accuracy}%</span>`
+            results.innerHTML += `<div class="stats--accuracy"><span class="stats--header">Accuracy:</span> <span class="stats--number" style='color: red'>${accuracy}%</span></div>`
         } else {
-            results.innerHTML += `, Accuracy: <span style='color: green'>${accuracy}%</span>`
+            results.innerHTML += `<div class="stats--accuracy"><span class="stats--header">Accuracy:</span> <span class="stats--number" style='color: green'>${accuracy}%</span></div>`
         }
     }
 }
 
 // Highlight the current word in red
-const highlightNextWord = () => {
+const highlightNextWord = (style = styleSelect) => {
     const wordElements = wordDisplay.children;
     if (currentWordIndex <= wordElements.length) {
         if (currentWordIndex == wordElements.length) {
             wordElements[currentWordIndex - 1].style.color = "black";
-            if (challengeSelect.value == 'timer') {
+            if (challengeSelect == 'timer') {
                 wordDisplay.innerHTML = ''
                 currentWordIndex = 0;
                 wordsToType.length = 0;
                 wordGeneration(10);
             }
         } else if (currentWordIndex > 0) {
-            wordElements[currentWordIndex - 1].style.color = "black";
-            wordElements[currentWordIndex].style.color = "orange";
+            if (style != 'mt') wordElements[currentWordIndex - 1].style.color = "black";
+            (style != 'mt') ? wordElements[currentWordIndex].style.color = "orange" : wordElements[currentWordIndex].children[0].style.color = "orange";
         }
     }
 };
+
+const displayScroll = () => {
+    const wordElements = wordDisplay.children
+    console.log(Math.floor(wordElements[currentWordIndex].getBoundingClientRect().top - remaining.getBoundingClientRect().top))
+    console.log(wordDisplay.scrollTop)
+    if (Math.floor(wordElements[currentWordIndex].getBoundingClientRect().top) - remaining.getBoundingClientRect().top > 85) {
+        wordDisplay.style.scrollBehavior = 'smooth'
+        wordDisplay.scrollTop = wordElements[currentWordIndex].getBoundingClientRect().top
+    }
+}
 
 // Event listeners
 // Attach `updateWord` to `keydown` instead of `input`
 inputField.addEventListener("keydown", (event) => {
     if (isOngoing) {
+        // displayScroll();
         startTimer(event);
         isLetterCorrect(event);
         updateWord(event);
@@ -277,10 +365,7 @@ inputField.addEventListener("keydown", (event) => {
     }
 });
 
-modeSelect.addEventListener("change", () => startTest());
-timerSelect.addEventListener("change", () => startTest());
-challengeSelect.addEventListener("change", () => startTest());
-styleSelect.addEventListener("change", () => startTest());
+restartButton.addEventListener('click', () => startTest());
 
 // Start the test
 startTest();

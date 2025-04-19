@@ -87,14 +87,16 @@ nav{
 }
 .choco--modes{
     background-color: #8e6d5765;
-    margin-inline: 10ch;
-    border-radius: 2ch;
+    margin-inline: 25%;
+    border-radius: 30px;
     padding: 1ch;
-    padding-inline: ch; 
     align-items: center;
-    margin-block-end: 3ch;
-    display: flex;
-    justify-content: space-between;
+    justify-items: center;
+    margin-bottom: 3ch;
+    display: grid;
+    grid-template-columns: 1fr .5fr 1fr 1fr;
+    grid-template-rows: 25px 20px;
+    gap: 1px 20px;
 }
 .choco--modes select{
     height: 3ch;
@@ -109,6 +111,31 @@ nav{
 .choco--modes-responsive{
     display: none;
 }
+
+.choco--modes > div {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.choco--modes > div {
+ font-size: .9rem;
+}
+
+.choco--modes > div > p {
+    color: black;
+    font-size: 1rem;
+}
+
+.choco--modes > div > input[type="radio"] {
+    display: none;
+}
+
+.choco--modes > div > input[type="radio"]:checked + label {
+    color: var(--choco-background);
+}
+
 
 .choco-head{
     margin-block: 3ch;
@@ -191,7 +218,7 @@ nav{
     border-radius: 2ch;
     color: rgba(31, 21, 5, 0.788);
 }
-.choco-playground input{
+.choco-playground input[type='text']{
     width: 80%;
     margin: auto;
     margin-block-end: 3ch;
