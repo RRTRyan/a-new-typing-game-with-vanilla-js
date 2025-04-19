@@ -18,7 +18,7 @@
     <nav>
         <div class="choco-logo">
             <img src="assets/img/logo.jpeg" alt="logo">
-            <p>Choco<span>Type</span></p>
+            <h2>Choco<span>Type</span></h2>
         </div>
         <div class="choco-settings">
             <button><a href="pages/login.html">Login</a></button>
@@ -51,23 +51,18 @@
                         <label for="mode--input-medium" class="choco--mode-select">Medium</label>
                         <input type="radio" name="difficulty" id="mode--input-hard" value="hard">
                         <label for="mode--input-hard" class="choco--mode-select">Hard</label>
-                        <!-- <select id="mode">
-                            <option value="easy">Easy</option>
-                            <option value="medium">Medium</option>
-                            <option value="hard">Hard</option>
-                        </select> -->
                     </div>
                     <div class="choco--challenge">
-                        <input type="radio" name="challenge" id="mode--input-time" value="timer">
+                        <input type="radio" name="challenge" id="mode--input-time" value="time">
                         <label for="mode--input-time" class="choco--mode-select"><i class="fa-solid fa-clock"></i><span> Time</span></label>
-                        <input type="radio" name="challenge" id="mode--input-word" value="word">
-                        <label for="mode--input-word" class="choco--mode-select"><i class="fa-solid fa-font"></i><span> Word</span></label checked>
+                        <input type="radio" name="challenge" id="mode--input-word" value="word" checked>
+                        <label for="mode--input-word" class="choco--mode-select"><i class="fa-solid fa-font"></i><span> Word</span></label>
                     </div>
                     <div class="choco--length">
                         <span><i class="fa-solid fa-stopwatch-20"></i></span>
                         <input type="radio" name="length" id="mode--input-short" value="10">
                         <label for="mode--input-short" class="choco--mode-select">10</label>
-                        <input type="radio" name="length" id="mode--input-normal" value="25">
+                        <input type="radio" name="length" id="mode--input-normal" value="25" checked>
                         <label for="mode--input-normal" class="choco--mode-select">25</label>
                         <input type="radio" name="length" id="mode--input-long" value="50">
                         <label for="mode--input-long" class="choco--mode-select">50</label>
@@ -144,8 +139,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="choco-text--field">
+                <div class="choco-text--field" tabindex="0">
                     <div class="choco--start">
                         <div class="choco--play">
                             <div class="remaining--display">
@@ -167,11 +161,11 @@
                             <input type="text" id="input-field" autofocus>
                         </div>
                         <div class="choco--stats">
-                            <p id="results">Results : </p>
+                            <p id="results"></p>
                         </div>
                     </div>
                     <div class="choco--restart">
-                        <button><i class="fa-solid fa-arrow-rotate-left"></i></button>
+                        <button class="choco--restart-button"><i class="fa-solid fa-arrow-rotate-left"></i></button>
                     </div>
                 </div>
             </div>

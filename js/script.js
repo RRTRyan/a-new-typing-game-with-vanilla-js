@@ -86,7 +86,7 @@ const wordDisplay = document.getElementById("word-display");
 const inputField = document.getElementById("input-field");
 const results = document.getElementById("results");
 const remaining = document.getElementById("remaining-words");
-const restartButton = document.querySelector('.choco--restart')
+const restartButton = document.querySelector('.choco--restart-button')
 
 const words = {
     easy: ["apple", "banana", "grape", "orange", "cherry"],
@@ -149,7 +149,7 @@ const startTest = (wordCount, challenge = challengeSelect) => {
 
         case 'time':
             remaining.innerText = Math.round((lengthSelect.match(/\d+/)));
-            wordCount = 10
+            wordCount = 50
             break;
 
         default: alert("duh")
@@ -164,20 +164,21 @@ const startTest = (wordCount, challenge = challengeSelect) => {
 
     wordGeneration(wordCount)
 
+    inputField.removeAttribute('disabled')
     inputField.value = "";
     results.textContent = "";
 };
 
 const endTest = () => {
     isOngoing = false;
-    // if (!isOngoing) {
-    //     if (wpmHistory.length != 0) results.innerHTML += `<p>${(wpmHistory.reduce((a, b) => a + b) / wpmHistory.length).toFixed(2)}</p>`
-    // }
+    if (!isOngoing) {
+        inputField.setAttribute('disabled', "")
+    }
 }
 
 // Start the timer when user begins typing
 const startTimer = (event) => {
-    if (!startTime && (String(event.key).match(/^\S$/))) startTime = Date.now();
+    if (!startTime && ((String(event.key).match(/^\S$/)) || event.key == ' ')) startTime = Date.now();
 };
 
 const showRemaining = (event, challenge = challengeSelect) => {
@@ -191,7 +192,7 @@ const showRemaining = (event, challenge = challengeSelect) => {
             break;
 
         case 'time':
-            if (pressCount == 0 && String(event.key).match(/^\S$/)) {
+            if (pressCount == 0 && ((String(event.key).match(/^\S$/)) || event.key == ' ')) {
                 const remainingTime = setInterval(() => {
                     remaining.innerText = Math.round((startTime + lengthSelect.match(/\d+/) * 1000 - Date.now()) / 1000)
                     if (remaining.innerText == 0) {
@@ -217,10 +218,10 @@ const barProgression = (length, time) => {
         if (time < (length / 10 * (i)) && document.getElementById(`choco-bar--${i}0`).style.display != 'none') {
             const chocoSlice = document.getElementById(`choco-bar--${i}0`);
             chocoSlice.animate(
-                [{opacity: '0%'}],
-                {duration: 1000}
+                [{ opacity: '0%' }],
+                { duration: 1000 }
             )
-            setTimeout(() => chocoSlice.style.display = 'none',1000)
+            setTimeout(() => chocoSlice.style.display = 'none', 1000)
         }
     }
 }
@@ -243,6 +244,7 @@ const getPressCount = (event) => {
 
 const isLetterCorrect = (event, style = styleSelect) => {
     const wordLetters = wordDisplay.children;
+    if (style == 'mt') { inputField.value = '' }
     if (currentLetterIndex < wordsToType[currentWordIndex].length) {
         if ((event.key.match(/^\S$/) == wordsToType[currentWordIndex][currentLetterIndex])) {
             correctInput++
@@ -293,8 +295,6 @@ const inputBackspace = (event, style) => {
         if (currentLetterIndex + 1 > wordsToType[currentWordIndex].length) wordLetters[currentWordIndex].lastChild.remove('span')
         if (style == 'mt' && currentLetterIndex + 1 == wordsToType[currentWordIndex].length) { wordLetters[currentWordIndex].children[currentLetterIndex].style.color = 'orange' }
     }
-    console.log(currentLetterIndex)
-    console.log(wordLetters[currentWordIndex].innerHTML.split(/typed-letter/).length + wordLetters[currentWordIndex].innerHTML.split(/overflowLetter/).length - 3)
 }
 
 const inputOverflow = (event, style) => {
@@ -337,22 +337,22 @@ const updateWord = (event, style = styleSelect) => {
 // Display results with color when changing
 const statsEvolution = (wpm, accuracy) => {
     if (!results.textContent) {
-        results.innerHTML = `<div class="stats--wmp"><span class="stats--header">WPM:</span> <span class="stats--number">${wpm}</span></div>`
-        results.innerHTML += `<div class="stats--accuracy"><span class="stats--header">Accuracy:</span> <span class="stats--number">${accuracy}%</span></div>`
+        results.innerHTML = `<div id="stats--wpm"><span class="stats--header">WPM:</span> <span class="stats--number">${wpm}</span></div>`
+        results.innerHTML += `<div id="stats--accuracy"><span class="stats--header">Accuracy:</span> <span class="stats--number">${accuracy}%</span></div>`
     } else {
         let resultsCopy = results.textContent
         const wpmPattern = (Number(resultsCopy.match(/[0-9]*\.?[0-9]*(?=A)/))) // Regexp for finding WPM old value
         if (wpmPattern > wpm) {
-            results.innerHTML = `<div class="stats--wmp"><span class="stats--header">WPM:</span> <span class="stats--number" style='color: red'>${wpm}</span></div>`
+            results.innerHTML = `<div id="stats--wpm"><span class="stats--header">WPM:</span> <span class="stats--number" style='color: red'>${wpm}</span></div>`
         } else {
-            results.innerHTML = `<div class="stats--wmp"><span class="stats--header">WPM:</span> <span class="stats--number" style='color: green'>${wpm}</span></div>`
+            results.innerHTML = `<div id="stats--wpm"><span class="stats--header">WPM:</span> <span class="stats--number" style='color: green'>${wpm}</span></div>`
         }
 
         const accuracyPattern = (Number(resultsCopy.match(/[0-9]*\.?[0-9]*(?=%)/)))
         if (accuracyPattern > accuracy) {
-            results.innerHTML += `<div class="stats--accuracy"><span class="stats--header">Accuracy:</span> <span class="stats--number" style='color: red'>${accuracy}%</span></div>`
+            results.innerHTML += `<div id="stats--accuracy"><span class="stats--header">Accuracy:</span> <span class="stats--number" style='color: red'>${accuracy}%</span></div>`
         } else {
-            results.innerHTML += `<div class="stats--accuracy"><span class="stats--header">Accuracy:</span> <span class="stats--number" style='color: green'>${accuracy}%</span></div>`
+            results.innerHTML += `<div id="stats--accuracy"><span class="stats--header">Accuracy:</span> <span class="stats--number" style='color: green'>${accuracy}%</span></div>`
         }
     }
 }
@@ -367,7 +367,8 @@ const highlightNextWord = (style = styleSelect) => {
                 wordDisplay.innerHTML = ''
                 currentWordIndex = 0;
                 wordsToType.length = 0;
-                wordGeneration(10);
+                wordGeneration(50);
+                wordDisplay.scrollTop = 0
             }
         } else if (currentWordIndex > 0) {
             if (style != 'mt') wordElements[currentWordIndex - 1].style.color = "#ffffff";
@@ -378,11 +379,12 @@ const highlightNextWord = (style = styleSelect) => {
 
 const displayScroll = () => {
     const wordElements = wordDisplay.children
-    console.log(Math.floor(wordElements[currentWordIndex].getBoundingClientRect().top - wordDisplay.getBoundingClientRect().top))
-    console.log(wordDisplay.scrollTop)
-    if (Math.floor(wordElements[currentWordIndex].getBoundingClientRect().top) - wordDisplay.getBoundingClientRect().top > 85) {
+    if (Math.floor(Math.floor(wordElements[currentWordIndex].getBoundingClientRect().top - wordDisplay.getBoundingClientRect().top)) > 0) {
         wordDisplay.style.scrollBehavior = 'smooth'
-        wordDisplay.scrollTo(wordElements[currentWordIndex])
+        wordDisplay.scrollTop += Math.floor(wordElements[currentWordIndex].getBoundingClientRect().top - wordDisplay.getBoundingClientRect().top)
+    } else if (Math.floor(wordElements[currentWordIndex].getBoundingClientRect().top - wordDisplay.getBoundingClientRect().top < 0)) {
+        wordDisplay.style.scrollBehavior = 'smooth'
+        wordDisplay.scrollTop += Math.floor(wordElements[currentWordIndex].getBoundingClientRect().top - wordDisplay.getBoundingClientRect().top)
     }
 }
 
@@ -390,9 +392,9 @@ const displayScroll = () => {
 // Attach `updateWord` to `keydown` instead of `input`
 inputField.addEventListener("keydown", (event) => {
     if (isOngoing) {
-        displayScroll();
         startTimer(event);
         isLetterCorrect(event);
+        displayScroll();
         updateWord(event);
         showRemaining(event);
         getPressCount(event);
@@ -439,7 +441,6 @@ overlay.addEventListener('click', (e) => {
 });
 
 easyDifficultyButton.addEventListener('click', () => {
-    console.log(easyDifficultyButton.value)
     difficultySelect = easyDifficultyButton.value
     startTest()
 })

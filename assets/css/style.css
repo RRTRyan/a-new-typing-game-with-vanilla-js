@@ -88,15 +88,15 @@ nav{
 }
 .choco--modes{
     background-color: #8e6d5765;
-    margin-inline: 15%;
+    backdrop-filter: blur(3px);
+    margin-inline: 10%;
     border-radius: 30px;
     padding: 1ch;
     align-items: center;
     justify-items: center;
     margin-bottom: 3ch;
     display: grid;
-    grid-template-columns: minmax(100px, 1fr) minmax(100px, 1fr) minmax(100px, 1fr) minmax(100px, 1fr);
-    grid-template-rows: 25px 20px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1.5fr) minmax(160px, 1fr));
     gap: 5px 25px;
 }
 .choco--modes select{
@@ -138,8 +138,9 @@ nav{
 .choco--modes > div > input[type="radio"]:checked + label {
     color: var(--choco-background);
     background-color: #f4e3d7d3;
-    padding-inline: 1ch;
+    padding: .5% 4%;
     border-radius: 5px;
+    transition: .2s linear;
 }
 .choco--difficulty{
     gap: 1ch;
@@ -185,33 +186,48 @@ nav{
     flex-direction: row;
     margin: auto;
     background-color: rgba(168, 136, 117, 0.349);
+    backdrop-filter: blur(3px);
     border-radius: 2ch;
     border: 2px solid #eaddd38c;
+    transition: .3s ease;
+}
+.choco-text--field:not(:focus-within) {
+    filter: blur(2px);
+    transition: .3s ease;
 }
 .choco--start{
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 1.5% 3%;
+    padding: 1.5% 1.5% 0;
 }
 .choco--restart{
-    margin: auto;
+    display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-block: 2ch;
+    margin-bottom: 1%;
 }
 .choco--restart button{
-    margin-inline-start: 35vw;
-    padding-inline: 2ch;
-    padding-block: 1ch;
+    
+    width: 70px;
+    height: 50px;
     background-color:#22160fad;
     opacity: 75%;
     border: none;
     outline: none;
-    border-radius: 2ch;
+    border-radius: 20px;
     justify-content: center;
+    transition: .2s ease-in-out;
+}
+.choco--restart button:hover {
+    scale: 1.05;
+    transition: .2s ease-in-out;
+}
+.choco--restart button:hover > i {
+    rotate: -360deg;
+    transition: 1s ease-in-out;
 }
 .choco--restart i{
     font-size: larger;
@@ -232,19 +248,20 @@ nav{
     text-align: center;
 }
 #remaining-words{
-    color: var(--choco-white);
+    color: var(--choco-background);
     font-size: 2rem;
     width: 10%;
 }
 #choco-bar{
-    width: 90%;
+    width: 85%;
     height: 60%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(10, 1fr);
     grid-template-rows: 100%;
 }
 
 .choco--bar--slice{
+    box-shadow: 0px 0px 10px #190c0925;
     display: inline-block;
     background-color: var(--choco-background);
     border: 3px solid var(--choco-milk);
@@ -258,10 +275,12 @@ nav{
 }
 
 #word-display{
+    height: 100px;
     font-size: 1.7rem;
     text-align: start;
     width: 100%;
-    margin: 1% 0 2%;
+    margin: 1% 1% 2%;
+    overflow: hidden;
     color: rgba(31, 21, 5, 0.788);
 }
 
@@ -272,13 +291,15 @@ nav{
 }
 
 .choco-playground input[type='text']{
-    width: 80%;
+    display: block;
     opacity: .5;
-    font-size: large;
+    font-size: 1.5rem;
     text-align: center;
     border: none;
     height: 40px;
     width: min-content;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 1ch;
     outline: none;
     background-color: var(--choco-white);
@@ -286,10 +307,10 @@ nav{
 }
 .choco--stats{
     width: 20%;
+    height: 200px;
     display: block;
     padding-inline: 2ch;
-    margin-inline: 5ch;
-    margin-block: 3ch;
+    margin: 2%;
     flex-direction: column;
     justify-content: space-between;
     background-color: var(--text-color-one);
@@ -298,14 +319,47 @@ nav{
 #results{
     width: 100%;
     height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    padding-block: 10% ;
+    align-items: center;
+    color: var(--choco-white);
+}
+#results > div {
+    box-shadow: 0px 0px 10px #190c09;
+}
+
+#stats--wpm{
+    grid-area: 1;
     display: flex;
     flex-flow: column nowrap;
-    padding-block: 3ch ;
+    background-color: var(--choco-dark);
+    padding: 4%;
+    border-radius: 10px;
 }
+#stats--accuracy{
+    grid-area: 3;
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: var(--choco-dark);
+    padding: 4%;
+    border-radius: 10px;
+}
+
+.stats--header {
+    color: var(--choco-white);
+    font-size: 1.2rem;
+}
+.stats--number {
+    font-size: 1.4rem;
+}
+
 footer{
     width: 100%;
     height: auto;
     position: absolute;
+    bottom: 0;
     text-align: center;
     font-size: 1rem;
     color: var(--choco-white);
@@ -410,9 +464,22 @@ footer{
     .choco--start{
         display: flex;
         flex-direction: column-reverse;
+        margin-bottom: 2%;
+    }
+    #results {
+        display: flex;
+        height: 110px;
+        padding: 5% .5%;
+        align-items: center;
+        justify-content: space-around;
+    }
+    #results > div {
+        width: 40%;
     }
     .choco--stats{
-        width: 90%;
+        height: fit-content;
+        width: 80%;
+        max-width: 90%;
         display: flex;
         margin-inline: 4vw;
         padding-inline: 0;
