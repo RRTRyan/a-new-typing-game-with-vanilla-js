@@ -69,23 +69,28 @@ nav{
     margin-inline: 1ch;
 }
 .choco-settings button{
-    padding: 1ch;
-    padding-inline: 2ch;
+    padding: 5px;
+    padding-inline: 1ch;
+    border:2px solid #442e2249;
     font-size: 1rem;
     outline: none;
-    border: 1px solid var(--choco-caramel);
     border-radius: 1ch;
     background-color: var(--choco-background);
 }
 .choco-settings button a{
     text-decoration: none;
+    font-size: 0.9em;
     color: var(--choco-white);
 }
 .choco-sign_up{
     color: var(--choco-white);
     padding-inline: 2ch;
+    font-size: 0.9em;
     margin-right: 2ch;
 }
+
+
+/*---------------navbar for modes-----------------*/
 .choco--modes{
     background-color: #8e6d5765;
     backdrop-filter: blur(3px);
@@ -112,7 +117,6 @@ nav{
 .choco--modes-responsive{
     display: none;
 }
-
 .choco--modes > div {
     display: flex;
     flex-flow: row nowrap;
@@ -120,21 +124,17 @@ nav{
     align-items: center;
     width: 100%;
 }
-
 .choco--modes > div {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
-
 .choco--modes > div > p {
     color: #f4e3d7cc;
     padding-inline-start: 1ch;
     font-size: 1rem;
 }
-
 .choco--modes > div > input[type="radio"] {
     display: none;
 }
-
 .choco--modes > div > input[type="radio"]:checked + label {
     color: var(--choco-background);
     background-color: #f4e3d7d3;
@@ -142,6 +142,16 @@ nav{
     border-radius: 5px;
     transition: .2s linear;
 }
+.choco--modes label{
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+.choco--modes label:hover {
+    padding-inline: 1ch;
+    padding-block: 5px;
+    border-radius: 5px;
+    background-color: var(--choco-dark);
+} 
 .choco--difficulty{
     gap: 1ch;
 }
@@ -153,6 +163,7 @@ nav{
 }
 
 
+/*------------bottom logo-------------*/
 .choco-head{
     margin-block: 3ch;
     display: flex;
@@ -170,6 +181,8 @@ nav{
 .choco-mascotte{
     height: 17ch;
 }
+
+/*-----------playground field------------*/
 .choco-main{
     display: flex;
     flex-direction: row;
@@ -275,21 +288,22 @@ nav{
 }
 
 #word-display{
-    height: 100px;
     font-size: 1.7rem;
     text-align: start;
     width: 100%;
     margin: 1% 1% 2%;
     overflow: hidden;
     color: rgba(31, 21, 5, 0.788);
+    height: 3em;
+    line-height:1.5em;
+    scroll-behavior: smooth;
+    margin-bottom: 1ch;
 }
-
-.word{
+.word {
     width: fit-content;
     display: inline-block;
     margin-right: 1ch;
 }
-
 .choco-playground input[type='text']{
     display: block;
     opacity: .5;
@@ -305,6 +319,8 @@ nav{
     background-color: var(--choco-white);
     color: var(--text-color-one);
 }
+
+/*-----------results------------*/
 .choco--stats{
     width: 20%;
     height: 200px;
@@ -317,6 +333,7 @@ nav{
     border-radius: 10px;
 }
 #results{
+    display: none;
     width: 100%;
     height: 100%;
     display: grid;
@@ -366,6 +383,7 @@ footer{
     background-color: var(--choco-milk);
 }
 
+/*-------------responsive design-------------*/
 @media screen and (max-width:800px){
     .choco--modes{
         display: none;
@@ -414,6 +432,10 @@ footer{
         animation: fadeIn 0.3s ease;
         position: relative;
     }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    } 
     .close-overlay {
         position: absolute;
         top: 1ch;
@@ -452,12 +474,7 @@ footer{
     }
     .option-buttons button:hover {
         background-color: var(--choco-dark);
-    }  
-    @keyframes fadeIn {
-        from { opacity: 0; transform: scale(0.95); }
-        to { opacity: 1; transform: scale(1); }
-    }    
-    
+    }   
     body{
         height: auto;
     }
@@ -490,4 +507,41 @@ footer{
     .choco--play{
         width: 80%;
     }
+}
+
+/*---------for logged pages---------*/
+.choco-logged-settings{
+    display: flex;
+    flex-direction: row;
+    gap: 2ch;
+}
+.choco-logged-settings button{
+    padding: 1ch;
+    padding-inline: 2ch;
+    border:2px solid #442e2249;
+    font-size: 0.8rem;
+    outline: none;
+    border-radius: 1ch;
+    margin-inline-end: 3ch;
+    background-color: var(--choco-background);
+}
+.choco-logged-settings button a{
+    text-decoration: none;
+    color: var(--choco-white);
+}
+.choco--account{
+    align-items: center;
+    display: flex;
+    margin-inline-end: 2ch;
+    cursor: pointer;
+}
+.choco--account p{
+    color: var(--text-color-one);
+    font-size: 0.9em;
+}
+.choco--account img{
+    height: 4ch;
+    object-fit: cover;
+    border-radius: 50%;
+    padding-inline: 1ch;
 }

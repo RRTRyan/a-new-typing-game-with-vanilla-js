@@ -24,6 +24,8 @@
 body{
     background-image: url(../img/background.PNG);
 }
+
+/*-------------main form------------*/
 .signup--section{
     width: 50%;
     margin: auto;
@@ -147,6 +149,7 @@ button span{
     padding-inline: 1ch;
 }
 
+/*-----------responsive design------------*/
 @media screen and (max-width:1000px) {
     .signup--section{
         width: auto;

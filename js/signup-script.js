@@ -1,11 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector(".signup--form");
-
     const username = document.getElementById("signup--username");
     const email = document.getElementById("signup--email");
     const password = document.getElementById("signup--password");
     const confirmPassword = document.getElementById("signup--conf-password");
-
     const usernameError = document.getElementById("usernameError");
     const emailError = document.getElementById("emailError");
     const passwordError = document.getElementById("passwordError");
