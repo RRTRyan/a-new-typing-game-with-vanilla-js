@@ -147,7 +147,7 @@ const startTest = (wordCount, challenge = challengeSelect) => {
             wordCount = Number(lengthSelect.match(/\d+/));
             break;
 
-        case 'timer':
+        case 'time':
             remaining.innerText = Math.round((lengthSelect.match(/\d+/)));
             wordCount = 10
             break;
@@ -155,6 +155,12 @@ const startTest = (wordCount, challenge = challengeSelect) => {
         default: alert("duh")
             break;
     }
+
+    for (let i = 10; i >= 1; i--) {
+        const chocoSlice = document.getElementById(`choco-bar--${i}0`);
+        chocoSlice.style.display = 'inline-block'
+    }
+
 
     wordGeneration(wordCount)
 
@@ -179,11 +185,12 @@ const showRemaining = (event, challenge = challengeSelect) => {
         case 'word':
             if (event.key == ' ') {
                 remaining.innerText = wordDisplay.innerHTML.split("word").length - currentWordIndex - 1
+                barProgression(lengthSelect, Number(remaining.innerText))
             }
             if (remaining.innerText == 0) endTest()
             break;
 
-        case 'timer':
+        case 'time':
             if (pressCount == 0 && String(event.key).match(/^\S$/)) {
                 const remainingTime = setInterval(() => {
                     remaining.innerText = Math.round((startTime + lengthSelect.match(/\d+/) * 1000 - Date.now()) / 1000)
@@ -195,12 +202,26 @@ const showRemaining = (event, challenge = challengeSelect) => {
                         clearInterval(remainingTime)
                         remaining.innerText = lengthSelect.match(/\d+/)
                     }
+                    barProgression(lengthSelect, Number(remaining.innerText))
                 }, 1000)
             }
             break;
 
         default: alert("Still working on it")
             break;
+    }
+}
+
+const barProgression = (length, time) => {
+    for (let i = 10; i >= 1; i--) {
+        if (time < (length / 10 * (i)) && document.getElementById(`choco-bar--${i}0`).style.display != 'none') {
+            const chocoSlice = document.getElementById(`choco-bar--${i}0`);
+            chocoSlice.animate(
+                [{opacity: '0%'}],
+                {duration: 1000}
+            )
+            setTimeout(() => chocoSlice.style.display = 'none',1000)
+        }
     }
 }
 
@@ -248,9 +269,9 @@ const inputBackspace = (event, style) => {
     const wordLetters = wordDisplay.children;
     if (event.key === 'Backspace' && currentLetterIndex >= 0 && currentLetterIndex < wordsToType[currentWordIndex].length) {
         if (style == 'mt') wordLetters[currentWordIndex].children[currentLetterIndex].style.color = ''
-        if (currentLetterIndex == 0 && currentWordIndex > 0) {
+        if (currentLetterIndex == 0 && currentWordIndex > 0 && style == 'mt') {
             currentWordIndex--
-            currentLetterIndex = (wordLetters[currentWordIndex].innerHTML.split(/typed-letter/).length + wordLetters[currentWordIndex].innerHTML.split(/overflowLetter/).length - 3)
+            currentLetterIndex = (wordLetters[currentWordIndex].innerHTML.split(/typed-letter/).length + wordLetters[currentWordIndex].innerHTML.split(/overflowLetter/).length - 2)
             if (style == 'mt' && currentLetterIndex < wordsToType[currentWordIndex].length) {
                 wordLetters[currentWordIndex].children[currentLetterIndex].style.color = 'orange'
                 wordLetters[currentWordIndex + 1].children[0].classList.remove('typed-letter')
@@ -274,7 +295,6 @@ const inputBackspace = (event, style) => {
     }
     console.log(currentLetterIndex)
     console.log(wordLetters[currentWordIndex].innerHTML.split(/typed-letter/).length + wordLetters[currentWordIndex].innerHTML.split(/overflowLetter/).length - 3)
-    // console.log(wordLetters[currentWordIndex].children[currentLetterIndex - 1].outerHTML)
 }
 
 const inputOverflow = (event, style) => {
@@ -295,8 +315,9 @@ const updateWord = (event, style = styleSelect) => {
         if (inputField.value.trim() === wordsToType[currentWordIndex] || style == 'mt') {
             if (!previousEndTime) previousEndTime = startTime;
 
-            if (style = 'mt') {
+            if (style == 'mt') {
                 invalidInput += wordsToType[currentWordIndex].length - currentLetterIndex
+                if (currentLetterIndex < wordsToType[currentWordIndex].length) wordDisplay.children[currentWordIndex].children[currentLetterIndex].style.color = ''
             }
 
             const { wpm, accuracy } = getCurrentStats();
@@ -341,8 +362,8 @@ const highlightNextWord = (style = styleSelect) => {
     const wordElements = wordDisplay.children;
     if (currentWordIndex <= wordElements.length) {
         if (currentWordIndex == wordElements.length) {
-            wordElements[currentWordIndex - 1].style.color = "#ffffff";
-            if (challengeSelect == 'timer') {
+            if (style != 'mt') wordElements[currentWordIndex - 1].style.color = "#ffffff";
+            if (challengeSelect == 'time') {
                 wordDisplay.innerHTML = ''
                 currentWordIndex = 0;
                 wordsToType.length = 0;
@@ -357,11 +378,11 @@ const highlightNextWord = (style = styleSelect) => {
 
 const displayScroll = () => {
     const wordElements = wordDisplay.children
-    console.log(Math.floor(wordElements[currentWordIndex].getBoundingClientRect().top - remaining.getBoundingClientRect().top))
+    console.log(Math.floor(wordElements[currentWordIndex].getBoundingClientRect().top - wordDisplay.getBoundingClientRect().top))
     console.log(wordDisplay.scrollTop)
-    if (Math.floor(wordElements[currentWordIndex].getBoundingClientRect().top) - remaining.getBoundingClientRect().top > 85) {
+    if (Math.floor(wordElements[currentWordIndex].getBoundingClientRect().top) - wordDisplay.getBoundingClientRect().top > 85) {
         wordDisplay.style.scrollBehavior = 'smooth'
-        wordDisplay.scrollTop = wordElements[currentWordIndex].getBoundingClientRect().top
+        wordDisplay.scrollTo(wordElements[currentWordIndex])
     }
 }
 
@@ -369,7 +390,7 @@ const displayScroll = () => {
 // Attach `updateWord` to `keydown` instead of `input`
 inputField.addEventListener("keydown", (event) => {
     if (isOngoing) {
-        // displayScroll();
+        displayScroll();
         startTimer(event);
         isLetterCorrect(event);
         updateWord(event);
@@ -390,6 +411,19 @@ const toggleBtn = document.getElementById('options-toggle');
 const overlay = document.getElementById('overlay-menu');
 const closeBtn = document.getElementById('close-overlay');
 
+const easyDifficultyButton = document.getElementById('mode--button-easy')
+const mediumDifficultyButton = document.getElementById('mode--button-medium')
+const hardDifficultyButton = document.getElementById('mode--button-hard')
+const timerModeButton = document.getElementById('challenge--button-time')
+const wordModeButton = document.getElementById('challenge--button-word')
+const shortLengthButton = document.getElementById('length--button-short')
+const mediumLengthButton = document.getElementById('length--button-normal')
+const longLengthButton = document.getElementById('length--button-long')
+const longerLengthButton = document.getElementById('length--button-longer')
+const flexibleStyleButton = document.getElementById('style--button-flexible')
+const strictStyleButton = document.getElementById('style--button-strict')
+
+
 toggleBtn.addEventListener('click', () => {
     overlay.classList.remove('hidden');
 });
@@ -404,4 +438,51 @@ overlay.addEventListener('click', (e) => {
     }
 });
 
+easyDifficultyButton.addEventListener('click', () => {
+    console.log(easyDifficultyButton.value)
+    difficultySelect = easyDifficultyButton.value
+    startTest()
+})
+mediumDifficultyButton.addEventListener('click', () => {
+    difficultySelect = mediumDifficultyButton.value
+    startTest()
+})
+hardDifficultyButton.addEventListener('click', () => {
+    difficultySelect = hardDifficultyButton.value
+    startTest()
+})
 
+timerModeButton.addEventListener('click', () => {
+    challengeSelect = timerModeButton.value
+    startTest()
+})
+wordModeButton.addEventListener('click', () => {
+    challengeSelect = wordModeButton.value
+    startTest()
+})
+
+shortLengthButton.addEventListener('click', () => {
+    lengthSelect = shortLengthButton.value
+    startTest()
+})
+mediumLengthButton.addEventListener('click', () => {
+    lengthSelect = mediumLengthButton.value
+    startTest()
+})
+longLengthButton.addEventListener('click', () => {
+    lengthSelect = longLengthButton.value
+    startTest()
+})
+longerLengthButton.addEventListener('click', () => {
+    lengthSelect = longerLengthButton.value
+    startTest()
+})
+
+flexibleStyleButton.addEventListener('click', () => {
+    styleSelect = flexibleStyleButton.value
+    startTest()
+})
+strictStyleButton.addEventListener('click', () => {
+    styleSelect = strictStyleButton.value
+    startTest()
+})

@@ -1,4 +1,5 @@
 *{
+    box-sizing: border-box;
     padding: 0;
     margin: 0;
     list-style: none;
@@ -87,7 +88,7 @@ nav{
 }
 .choco--modes{
     background-color: #8e6d5765;
-    margin-inline: 25%;
+    margin-inline: 15%;
     border-radius: 30px;
     padding: 1ch;
     align-items: center;
@@ -175,7 +176,10 @@ nav{
 }
 .choco--start{
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
+    padding: 1.5% 3%;
 }
 .choco--restart{
     margin: auto;
@@ -200,22 +204,50 @@ nav{
     color: var(--choco-white);
 }
 .choco--play{
-    margin-inline-start: 5ch;
     width: 80%;
     overflow: hidden;
 }
+.remaining--display{
+    margin-block: 1%;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
 #remaining-words{
     color: var(--choco-white);
-    font-size: 2.5ch;
-    padding-block: 1ch;
-    padding-block-start: 3ch;
+    font-size: 2rem;
+    width: 10%;
 }
+#choco-bar{
+    width: 90%;
+    height: 60%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 100%;
+}
+
+.choco--bar--slice{
+    display: inline-block;
+    background-color: var(--choco-background);
+    border: 3px solid var(--choco-milk);
+}
+
+#choco-bar > :first-child{
+    border-radius: 5px 0 0 5px;
+}
+#choco-bar > :last-child{
+    border-radius: 0 5px 5px 0;
+}
+
 #word-display{
-    font-size: 2.5ch;
+    font-size: 1.7rem;
     text-align: start;
     width: 100%;
-    padding-bottom: 3ch;
-    border-radius: 2ch;
+    margin: 1% 0 2%;
     color: rgba(31, 21, 5, 0.788);
 }
 
@@ -227,12 +259,12 @@ nav{
 
 .choco-playground input[type='text']{
     width: 80%;
-    margin: auto;
-    margin-block-end: 3ch;
+    opacity: .5;
     font-size: large;
     text-align: center;
-    padding: 1.2ch;
     border: none;
+    height: 40px;
+    width: min-content;
     border-radius: 1ch;
     outline: none;
     background-color: var(--choco-white);
@@ -251,8 +283,9 @@ nav{
 }
 #results{
     width: 100%;
+    height: 100%;
     display: flex;
-    color: var(--text-color-one);
+    flex-flow: column nowrap;
     padding-block: 3ch ;
 }
 footer{

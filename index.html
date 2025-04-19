@@ -6,10 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChocoType</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" 
-    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
-    crossorigin="anonymous" 
-    referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" href="assets/img/logo.jpeg" type="image/jpeg">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="js/script.js" defer></script>
@@ -58,7 +57,7 @@
                         </select> -->
                     </div>
                     <div class="choco--challenge">
-                        <input type="radio" name="challenge" id="mode--input-time" value="timer">
+                        <input type="radio" name="challenge" id="mode--input-time" value="time">
                         <label for="mode--input-time" class="choco--mode-select">Time</label>
                         <input type="radio" name="challenge" id="mode--input-word" value="word">
                         <label for="mode--input-word" class="choco--mode-select">Word</label checked>
@@ -84,47 +83,84 @@
                     <button id="options-toggle"><i class="fa-solid fa-gamepad"></i><span> Options</span></button>
                     <div class="options-overlay hidden" id="overlay-menu">
                         <div class="options-panel">
-                            <button class="close-overlay" id="close-overlay"><i class="fa-solid fa-circle-xmark"></i></button>
-                        
+                            <button class="close-overlay" id="close-overlay"><i
+                                    class="fa-solid fa-circle-xmark"></i></button>
+
                             <div class="option-block">
                                 <p>Mode</p>
-                                    <div class="option-buttons" id="mode">
-                                        <button><option value="easy">Easy</option></button>
-                                        <button><option value="medium">Medium</option></button>
-                                        <button><option value="hard">Hard</option></button>
-                                    </div>
+                                <div class="option-buttons" id="mode">
+                                    <button id='mode--button-easy' value="easy">
+                                        Easy
+                                    </button>
+                                    <button id='mode--button-medium' value="medium">
+                                        Medium
+                                    </button>
+                                    <button id='mode--button-hard' value="hard">
+                                        Hard
+                                    </button>
+                                </div>
                             </div>
                             <div class="option-block">
-                                <p>challenge</p>
+                                <p>Challenge</p>
                                 <div class="option-buttons" id="challenge">
-                                    <button><option value="time">Time</option></button>
-                                    <button><option value="word">Word</option></button>
+                                    <button id='challenge--button-time' value="time">
+                                        Time
+                                    </button>
+                                    <button id='challenge--button-word' value="word">
+                                        Word
+                                    </button>
                                 </div>
                             </div>
                             <div class="option-block">
                                 <p>Count/Timer</p>
                                 <div class="option-buttons" id="timer">
-                                    <button><option value="10">10</option></button>
-                                    <button><option value="25">25</option></button>
-                                    <button><option value="50">50</option></button>
-                                    <button><option value="100">100</option></button>
+                                    <button id='length--button-short' value="10">
+                                        10
+                                    </button>
+                                    <button id='length--button-normal' value="25">
+                                        25
+                                    </button>
+                                    <button id='length--button-long' value="50">
+                                        50
+                                    </button>
+                                    <button id='length--button-longer' value="100">
+                                        100
+                                    </button>
                                 </div>
                             </div>
                             <div class="option-block">
                                 <p>Style</p>
                                 <div class="option-buttons" id="style">
-                                    <button><option value="mt">Flexible</option></button>
-                                    <button><option value="tr">Strict</option></button>
+                                    <button id='style--button-flexible' value="mt">
+                                        Flexible
+                                    </button>
+                                    <button id='style--button-strict' value="tr">
+                                        Strict
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                  
+
                 <div class="choco-text--field">
                     <div class="choco--start">
                         <div class="choco--play">
-                            <div><p id="remaining-words"></p></div>
+                            <div class="remaining--display">
+                                <p id="remaining-words"></p>
+                                <div id="choco-bar">
+                                    <div id="choco-bar--10" class="choco--bar--slice"></div>
+                                    <div id="choco-bar--20" class="choco--bar--slice"></div>
+                                    <div id="choco-bar--30" class="choco--bar--slice"></div>
+                                    <div id="choco-bar--40" class="choco--bar--slice"></div>
+                                    <div id="choco-bar--50" class="choco--bar--slice"></div>
+                                    <div id="choco-bar--60" class="choco--bar--slice"></div>
+                                    <div id="choco-bar--70" class="choco--bar--slice"></div>
+                                    <div id="choco-bar--80" class="choco--bar--slice"></div>
+                                    <div id="choco-bar--90" class="choco--bar--slice"></div>
+                                    <div id="choco-bar--100" class="choco--bar--slice"></div>
+                                </div>
+                            </div>
                             <p id="word-display"></p>
                             <input type="text" id="input-field" autofocus>
                         </div>
@@ -145,7 +181,9 @@
     </main>
 
     <footer>
-        <div><p>© 2025 ChocoType - rrtryan & aniasu</p></div>
+        <div>
+            <p>© 2025 ChocoType - rrtryan & aniasu</p>
+        </div>
     </footer>
 
 </body>
