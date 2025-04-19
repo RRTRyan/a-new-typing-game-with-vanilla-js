@@ -18,8 +18,8 @@
 <body>
     <nav>
         <div class="choco-logo">
-            <img src="../assets/img/logo.jpeg" alt="logo">
-            <p>Choco<span>Type</span></p>
+            <img src="../assets/img/mascotte.png.PNG" alt="logo">
+            <h1>Choco<span>Type</span></h1>
         </div>
         <div class="choco-logged-settings">
             <div class="choco--account">
@@ -42,23 +42,18 @@
                         <label for="mode--input-medium" class="choco--mode-select">Medium</label>
                         <input type="radio" name="difficulty" id="mode--input-hard" value="hard">
                         <label for="mode--input-hard" class="choco--mode-select">Hard</label>
-                        <!-- <select id="mode">
-                            <option value="easy">Easy</option>
-                            <option value="medium">Medium</option>
-                            <option value="hard">Hard</option>
-                        </select> -->
                     </div>
                     <div class="choco--challenge">
-                        <input type="radio" name="challenge" id="mode--input-time" value="timer">
+                        <input type="radio" name="challenge" id="mode--input-time" value="time">
                         <label for="mode--input-time" class="choco--mode-select"><i class="fa-solid fa-clock"></i><span> Time</span></label>
-                        <input type="radio" name="challenge" id="mode--input-word" value="word">
-                        <label for="mode--input-word" class="choco--mode-select"><i class="fa-solid fa-font"></i><span> Word</span></label checked>
+                        <input type="radio" name="challenge" id="mode--input-word" value="word" checked>
+                        <label for="mode--input-word" class="choco--mode-select"><i class="fa-solid fa-font"></i><span> Word</span></label>
                     </div>
                     <div class="choco--length">
                         <span><i class="fa-solid fa-stopwatch-20"></i></span>
                         <input type="radio" name="length" id="mode--input-short" value="10">
                         <label for="mode--input-short" class="choco--mode-select">10</label>
-                        <input type="radio" name="length" id="mode--input-normal" value="25">
+                        <input type="radio" name="length" id="mode--input-normal" value="25" checked>
                         <label for="mode--input-normal" class="choco--mode-select">25</label>
                         <input type="radio" name="length" id="mode--input-long" value="50">
                         <label for="mode--input-long" class="choco--mode-select">50</label>
@@ -76,52 +71,88 @@
                     <button id="options-toggle"><i class="fa-solid fa-gamepad"></i><span> Options</span></button>
                     <div class="options-overlay hidden" id="overlay-menu">
                         <div class="options-panel">
-                            <button class="close-overlay" id="close-overlay"><i class="fa-solid fa-circle-xmark"></i></button>
-                        
+                            <button class="close-overlay" id="close-overlay"><i
+                                    class="fa-solid fa-circle-xmark"></i></button>
+
                             <div class="option-block">
                                 <p>Mode</p>
-                                    <div class="option-buttons" id="mode">
-                                        <button><option value="easy">Easy</option></button>
-                                        <button><option value="medium">Medium</option></button>
-                                        <button><option value="hard">Hard</option></button>
-                                    </div>
+                                <div class="option-buttons" id="mode">
+                                    <button id='mode--button-easy' value="easy">
+                                        Easy
+                                    </button>
+                                    <button id='mode--button-medium' value="medium">
+                                        Medium
+                                    </button>
+                                    <button id='mode--button-hard' value="hard">
+                                        Hard
+                                    </button>
+                                </div>
                             </div>
                             <div class="option-block">
-                                <p>challenge</p>
+                                <p>Challenge</p>
                                 <div class="option-buttons" id="challenge">
-                                    <button><option value="time">Time</option></button>
-                                    <button><option value="word">Word</option></button>
+                                    <button id='challenge--button-time' value="time">
+                                        Time
+                                    </button>
+                                    <button id='challenge--button-word' value="word">
+                                        Word
+                                    </button>
                                 </div>
                             </div>
                             <div class="option-block">
                                 <p>Count/Timer</p>
                                 <div class="option-buttons" id="timer">
-                                    <button><option value="10">10</option></button>
-                                    <button><option value="25">25</option></button>
-                                    <button><option value="50">50</option></button>
-                                    <button><option value="100">100</option></button>
+                                    <button id='length--button-short' value="10">
+                                        10
+                                    </button>
+                                    <button id='length--button-normal' value="25">
+                                        25
+                                    </button>
+                                    <button id='length--button-long' value="50">
+                                        50
+                                    </button>
+                                    <button id='length--button-longer' value="100">
+                                        100
+                                    </button>
                                 </div>
                             </div>
                             <div class="option-block">
                                 <p>Style</p>
                                 <div class="option-buttons" id="style">
-                                    <button><option value="mt">Flexible</option></button>
-                                    <button><option value="tr">Strict</option></button>
+                                    <button id='style--button-flexible' value="mt">
+                                        Flexible
+                                    </button>
+                                    <button id='style--button-strict' value="tr">
+                                        Strict
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                  
-                <div class="choco-text--field">
+                <div class="choco-text--field" tabindex="0">
                     <div class="choco--start">
                         <div class="choco--play">
-                            <div><p id="remaining-words"></p></div>
-                            <div id="word-display"></div>
+                            <div class="remaining--display">
+                                <p id="remaining-words"></p>
+                                <div id="choco-bar">
+                                    <div id="choco-bar--10" class="choco--bar--slice"></div>
+                                    <div id="choco-bar--20" class="choco--bar--slice"></div>
+                                    <div id="choco-bar--30" class="choco--bar--slice"></div>
+                                    <div id="choco-bar--40" class="choco--bar--slice"></div>
+                                    <div id="choco-bar--50" class="choco--bar--slice"></div>
+                                    <div id="choco-bar--60" class="choco--bar--slice"></div>
+                                    <div id="choco-bar--70" class="choco--bar--slice"></div>
+                                    <div id="choco-bar--80" class="choco--bar--slice"></div>
+                                    <div id="choco-bar--90" class="choco--bar--slice"></div>
+                                    <div id="choco-bar--100" class="choco--bar--slice"></div>
+                                </div>
+                            </div>
+                            <p id="word-display"></p>
                             <input type="text" id="input-field" autofocus>
                         </div>
                         <div class="choco--stats">
-                            <p id="results">Results : </p>
+                            <p id="results"></p>
                         </div>
                         <!-- <div class="choco--result">
                             <div>
@@ -138,7 +169,7 @@
                         </div> -->
                     </div>
                     <div class="choco--restart">
-                        <button><i class="fa-solid fa-arrow-rotate-left"></i></button>
+                        <button class="choco--restart-button"><i class="fa-solid fa-arrow-rotate-left"></i></button>
                     </div>
                 </div>
             </div>
@@ -150,7 +181,9 @@
     </main>
 
     <footer>
-        <div><p>© 2025 ChocoType - rrtryan & aniasu</p></div>
+        <div>
+            <p>© 2025 ChocoType - rrtryan & aniasu</p>
+        </div>
     </footer>
 
 </body>

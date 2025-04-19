@@ -56,8 +56,9 @@ nav{
     border-radius: 50%;
     object-fit: cover;
 }
-.choco-logo p{
-    font-size: larger;
+.choco-logo h1{
+    font-size: 1.5rem;
+    font-weight: 400;
     color: var(--choco-background);
 }
 .choco-logo span{
@@ -222,8 +223,7 @@ nav{
     width: 100%;
     margin-bottom: 1%;
 }
-.choco--restart button{
-    
+.choco--restart button{ 
     width: 70px;
     height: 50px;
     background-color:#22160fad;
@@ -291,7 +291,7 @@ nav{
     font-size: 1.7rem;
     text-align: start;
     width: 100%;
-    margin: 1% 1% 2%;
+    margin: 1% 2% 2%;
     overflow: hidden;
     color: rgba(31, 21, 5, 0.788);
     height: 3em;
@@ -376,7 +376,6 @@ footer{
     width: 100%;
     height: auto;
     position: absolute;
-    bottom: 0;
     text-align: center;
     font-size: 1rem;
     color: var(--choco-white);
