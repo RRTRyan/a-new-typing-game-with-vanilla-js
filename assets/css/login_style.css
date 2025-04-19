@@ -5,11 +5,11 @@
     font-family: 'Fredoka One', sans-serif;
 }
 :root{
-    --choco-milk:#a07555;
-    --choco-dark: #4B2E2B;
-    --choco-white: #F4E3D7;
-    --choco-caramel: #a0876c;
-    --text-color-one:#221206;
+    --choco-milk:#8f6b57;
+    --choco-dark: #4b2e2b ;
+    --choco-background: #22160f;
+    --choco-white: #f4e3d7;
+    --text-color-one:#25120d;
 }
 ::-webkit-scrollbar{
     z-index: -111111111;
@@ -117,8 +117,8 @@ main{
 }
 .error{
     color: var(--white);
-    background-color: rgb(227, 67, 67);
-    border: 2px solid red;
+    background-color: rgb(209, 96, 96);
+    border: 2px solid rgb(199, 72, 72);
     justify-content: center;
     margin: auto;
     width: 20vw;
@@ -139,7 +139,6 @@ main{
 }
 .login--right{
     width: 50%;
-    background-color: var(--choco-caramel);
     overflow: hidden;
 }
 .login--background{
@@ -173,3 +172,53 @@ main{
     }
 }
 
+@media screen and (max-width:800px) {
+ 
+    main{
+        width: 100%;
+        display: block;
+        height: auto;
+        overflow: hidden;
+    }
+    .login--left{
+        width: 100%;
+        height: 65vh;
+        padding-block-start: 15ch;
+        justify-content: center;
+        overflow: hidden;
+    }
+    .login--input{
+        width: auto;
+        margin-inline: 5ch;
+    }
+    .toLogin{
+        width: 100%;
+    }
+    .toHome{
+        width: 5ch;
+        text-align: center;
+    }
+    .button{
+        padding: 2vh;
+        width: 20vw;
+        border-radius: 1ch;
+        border: none;
+        font-size: 15px;
+    }
+    .error{
+        width: auto;
+    }
+    .login--right{
+        width: 100%;
+        overflow: hidden;
+    }
+    .login--background{
+        overflow: hidden;
+    }
+    .choco--login-img{
+        margin-bottom: 0;
+        height: 65vh;
+        bottom: -70vh;
+        right: 0vw;
+    }
+}

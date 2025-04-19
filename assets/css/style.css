@@ -31,6 +31,7 @@ body{
     background-image: url(../img/background.PNG);
     background-size: cover;
     height: 100vh;
+    width: 100%;
 }
 header{
     display: none;
@@ -104,6 +105,9 @@ nav{
 .choco--mode-select{
     color: var(--choco-white);
 }
+.choco--modes-responsive{
+    display: none;
+}
 
 .choco-head{
     margin-block: 3ch;
@@ -143,14 +147,17 @@ nav{
 }
 .choco--start{
     display: flex;
+    width: 100%;
 }
 .choco--restart{
     margin: auto;
+    justify-content: center;
     align-items: center;
     width: 100%;
     margin-block: 2ch;
 }
 .choco--restart button{
+    margin-inline-start: 35vw;
     padding-inline: 2ch;
     padding-block: 1ch;
     background-color:#22160fad;
@@ -158,6 +165,7 @@ nav{
     border: none;
     outline: none;
     border-radius: 2ch;
+    justify-content: center;
 }
 .choco--restart i{
     font-size: larger;
@@ -195,17 +203,6 @@ nav{
     background-color: var(--choco-white);
     color: var(--text-color-one);
 }
-.restart{
-    align-items: center;
-    color: var(--choco-background);
-    margin: auto;
-    background-color: #6b5041bb;
-    padding-inline: 3ch;
-    padding-block: 1ch;
-    border-radius: 1ch;
-    margin-block-end: 3ch;
-    font-size: larger;
-}
 .choco--stats{
     width: 20%;
     display: block;
@@ -231,4 +228,111 @@ footer{
     font-size: 1rem;
     color: var(--choco-white);
     background-color: var(--choco-milk);
+}
+
+@media screen and (max-width:800px){
+    .choco--modes{
+        display: none;
+    }
+    .choco--modes-responsive {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        margin-block: 2ch;
+    }  
+    #options-toggle {
+        background-color:#8e6d5765;;
+        color: var(--choco-white);
+        padding: 1ch 3ch;
+        border: none;
+        border-radius: 1ch;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+    .options-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        backdrop-filter: blur(5px);
+        background-color: #22160f80;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+    .hidden {
+        display: none;
+    }
+    .options-panel {
+        background-color: #18100be5;
+        padding: 3ch;
+        border-radius: 2ch;
+        width: 90%;
+        max-width: 500px;
+        color: var(--choco-white);
+        animation: fadeIn 0.3s ease;
+        position: relative;
+    }
+    .close-overlay {
+        position: absolute;
+        top: 1ch;
+        right: 1ch;
+        background: transparent;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--choco-white);
+        cursor: pointer;
+    }
+    .option-block {
+        margin-bottom: 2ch;
+        margin-top: 2ch;
+    }  
+    .option-block p {
+        margin-bottom: 1ch;
+        color: var(--choco-white);
+    }
+    .option-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1ch;
+        justify-content: center;
+    }  
+    .option-buttons button {
+        background-color: #8e6d57a8;
+        color: var(--choco-white);
+        padding: 1ch 2ch;
+        border: none;
+        border-radius: 1ch;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+    .option-buttons button:hover {
+        background-color: var(--choco-dark);
+    }  
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }    
+    
+    body{
+        height: auto;
+    }
+    .choco--start{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .choco--stats{
+        width: 90%;
+        display: flex;
+        margin-inline: 4vw;
+        padding-inline: 0;
+        margin-block: 0;
+        margin-block-start: 4ch;
+        justify-content: center;
+    }
+    .choco--play{
+        width: 80%;
+    }
 }

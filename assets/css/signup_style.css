@@ -23,9 +23,9 @@
     right: 0;
 }
 body{
-    background-color: var(--choco-caramel);
+    background-image: url(../img/background.PNG);
 }
-.signup--left{
+.signup--section{
     width: 50%;
     margin: auto;
     background-color: var(--choco-white);
@@ -117,7 +117,7 @@ body{
 .button{
     padding: 2vh;
     padding-inline: 3ch;
-    width: 11vw;
+    width: auto;
     border-radius: 1ch;
     border: none;
     background-color: var(--text-color-one);
@@ -127,4 +127,15 @@ body{
 }
 button span{
     padding-inline: 1ch;
+}
+
+@media screen and (max-width:1000px) {
+    .signup--section{
+        width: auto;
+        margin-inline: 3ch;
+    }
+    .signup--input{
+        width: auto;
+        margin-inline: 2ch;
+    }
 }

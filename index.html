@@ -10,6 +10,7 @@
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
     crossorigin="anonymous" 
     referrerpolicy="no-referrer" />
+    <link rel="icon" href="assets/img/mascotte.png.PNG" type="image/jpeg">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="js/script.js" defer></script>
 </head>
@@ -23,7 +24,7 @@
         <div class="choco-settings">
             <button><a href="pages/login.html">Login</a></button>
             <a href="pages/signup.html" class="choco-sign_up">Sign up</a>
-            <i class="fa-solid fa-gear" id="choco-to-setting"></i>
+            <!--<i class="fa-solid fa-gear" id="choco-to-setting"></i>-->
         </div>
     </nav>
 
@@ -64,6 +65,47 @@
                         </select>
                     </div>
                 </div>
+                <div class="choco--modes-responsive">
+                    <button id="options-toggle">Options</button>
+                    <div class="options-overlay hidden" id="overlay-menu">
+                        <div class="options-panel">
+                            <button class="close-overlay" id="close-overlay">✖</button>
+                        
+                            <div class="option-block">
+                                <p>Mode</p>
+                                    <div class="option-buttons" id="mode">
+                                        <button><option value="easy">Easy</option></button>
+                                        <button><option value="medium">Medium</option></button>
+                                        <button><option value="hard">Hard</option></button>
+                                    </div>
+                            </div>
+                            <div class="option-block">
+                                <p>challenge</p>
+                                <div class="option-buttons" id="challenge">
+                                    <button><option value="time">Time</option></button>
+                                    <button><option value="word">Word</option></button>
+                                </div>
+                            </div>
+                            <div class="option-block">
+                                <p>Count/Timer</p>
+                                <div class="option-buttons" id="timer">
+                                    <button><option value="10">10</option></button>
+                                    <button><option value="25">25</option></button>
+                                    <button><option value="50">50</option></button>
+                                    <button><option value="100">100</option></button>
+                                </div>
+                            </div>
+                            <div class="option-block">
+                                <p>Style</p>
+                                <div class="option-buttons" id="style">
+                                    <button><option value="mt">Flexible</option></button>
+                                    <button><option value="tr">Strict</option></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  
                 <div class="choco-text--field">
                     <div class="choco--start">
                         <div class="choco--play">

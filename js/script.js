@@ -284,3 +284,26 @@ styleSelect.addEventListener("change", () => startTest());
 
 // Start the test
 startTest();
+
+
+
+
+const toggleBtn = document.getElementById('options-toggle');
+const overlay = document.getElementById('overlay-menu');
+const closeBtn = document.getElementById('close-overlay');
+
+toggleBtn.addEventListener('click', () => {
+    overlay.classList.remove('hidden');
+});
+
+closeBtn.addEventListener('click', () => {
+    overlay.classList.add('hidden');
+});
+
+overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+        overlay.classList.add('hidden');
+    }
+});
+
+
