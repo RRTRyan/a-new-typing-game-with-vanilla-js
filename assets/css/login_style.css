@@ -13,10 +13,10 @@
 }
 ::-webkit-scrollbar{
     z-index: -111111111;
-    width: 1vw;
+    width: 0.2vw;
 }
 ::-webkit-scrollbar-thumb{
-    background: gray;
+    background: var(--choco-background);
     border-radius: 10px;
     z-index: -111111111;
     position: fixed;
@@ -189,7 +189,7 @@ main{
     }
     .login--input{
         width: auto;
-        margin-inline: 5ch;
+        margin-inline: 1ch;
     }
     .toLogin{
         width: 100%;
@@ -217,8 +217,8 @@ main{
     }
     .choco--login-img{
         margin-bottom: 0;
-        height: 65vh;
-        bottom: -70vh;
-        right: 0vw;
+        height: 50vh;
+        bottom: -59vh;
+        right: -1vw;
     }
 }

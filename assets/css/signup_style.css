@@ -5,19 +5,18 @@
     font-family: 'Fredoka One', sans-serif;
 }
 :root{
-    --choco-milk:#a07555;
-    --choco-dark: #4B2E2B;
-    --choco-white: #F4E3D7;
-    --choco-caramel: #a0876c;
-    --text-color-one:#221206;
+    --choco-milk:#8f6b57;
+    --choco-dark: #4b2e2b ;
+    --choco-background: #22160f;
+    --choco-white: #f4e3d7;
+    --text-color-one:#25120d;
 }
 ::-webkit-scrollbar{
     z-index: -111111111;
-    width: 1vw;
+    width: 0.1vw;
 }
 ::-webkit-scrollbar-thumb{
-    background: gray;
-    border-radius: 10px;
+    background: var(--choco-background);
     z-index: -111111111;
     position: fixed;
     right: 0;
@@ -101,18 +100,31 @@ body{
     padding: auto;
 }
 .form--group{
-    margin-bottom: ch;
+    margin-bottom: 2ch;
 }
 .error-message {
-    color: red;
-    font-size: 1em;
-    margin-top: 5px;
-    display: none;
+    color: #c0392b;
+    text-align: center;
+    padding-inline: 10ch;
 }
 .success-message {
-    color: green;
-    font-size: 1em;
-    margin-top: 10px;
+    color: #27ae60;
+    padding: 1ch;
+    padding-inline: 2ch;
+    margin-bottom: 2ch;
+    animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(5px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+.error-message, .success-message {
+    font-size: 0.9em;
+    margin-top: 0.5ch;
+    transition: opacity 0.3s ease;
+    text-align: left;
+    width: fit-content;
+    margin-inline: auto;
 }
 .button{
     padding: 2vh;
@@ -123,7 +135,13 @@ body{
     background-color: var(--text-color-one);
     color: var(--choco-white);
     font-size: 15px;
-    margin-bottom: 5ch;
+    margin-top: 1ch;
+    margin-bottom: 2ch;
+}
+.button:hover {
+    background-color: var(--choco-dark);
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 button span{
     padding-inline: 1ch;
@@ -137,5 +155,8 @@ button span{
     .signup--input{
         width: auto;
         margin-inline: 2ch;
+    }
+    .error-message{
+        padding-inline: 2ch;
     }
 }
